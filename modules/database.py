@@ -32,6 +32,12 @@ def closeConnection():
 		except:
 			_conn = None
 
+def getActivityTimes(sensor, location, sensorDict, locationDict):
+	pass
+
+def getAllLocationsAtDate(date):
+	pass
+
 def getAllDevicesAtDate(date):
 	command = """SELECT DeviceID, DevicePlugNumber, WhatsPluggedIn, SensorID FROM DeviceSensors WHERE RecordStatus='A'"""
 	devices = getCursor().execute(command).fetchall()
@@ -50,7 +56,7 @@ def getAllDevicesAtDate(date):
 			if transmission[devicePlugNumber] > 0 and not startTime[index]:
 				startTime[index] = time
 				startTime.append(None)
-			elif transmission[devicePlugNumber] < 0 and not endTime[index]:
+			elif transmission[devicePlugNumber] <= 0 and not endTime[index]:
 				endTime[index] = time
 				endTime.append(None)
 				index += 1
@@ -75,3 +81,6 @@ def getDeviceAtDate(deviceID, date):
 
 	transmissions = getCursor().execute(command).fetchall()
 	return transmissions
+
+def getLocationAtDate(locationID, date):
+	pass
