@@ -19,13 +19,8 @@ def activity():
 
 	return render_template('home.html')
 
-@app.route('/visualizations')
+@app.route('/viz')
 def viz():
 
-	# Sample SQL Server Query
-	cursor = database.getCursor()
-	rooms = cursor.execute("SELECT * FROM Rooms").fetchall();
-	print(rooms)
-	database.closeConnection()
 
-	return "MY VIS"
+	return render_template('index.html')
