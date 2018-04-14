@@ -1,12 +1,7 @@
   var w = 1000;
   var h = 400;
 
-var contintentColors = {celebration: '#fc5a74', development: '#fee633',
-    promotion: '#24d5e8'};
-
-
   var svg = d3.selectAll(".svg")
-  //.selectAll("svg")
   .append("svg")
   .attr("width", w)
   .attr("height", h)
@@ -36,7 +31,7 @@ d3.csv('activityData.csv',
 
     console.log(dataset);
 
-
+// sort data by activity 
 function render(d3Comparator) {
     if(d3Comparator) dataset = dataset.sort(function(a, b) {
         return d3[d3Comparator](a.activity, b.activity);
@@ -48,6 +43,7 @@ render('ascending');
 taskArray = dataset;
 
 
+// x axis - time scale
 timeScale = d3.scaleTime()
         .domain([d3.min(taskArray, function(d) {return (d.startTime);}),
                  d3.max(taskArray, function(d) {return (d.endTime);})])
