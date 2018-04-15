@@ -28,12 +28,10 @@ def viz():
 	# else:
 	dateStr = request.args.get('date', None)
 
-	if dateStr:
+	if dateStr and dateStr != "None":
 		date = datetime.strptime(dateStr, '%Y-%m-%d')
 	else:
 		date = datetime.today()
-
-	print(date)
 
 	if viewType == 'location':
 		title = "Patient's Location"
