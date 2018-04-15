@@ -33,6 +33,46 @@ def closeConnection():
 		except:
 			_conn = None
 
+def getAllActivities():
+	return [
+		  {
+		    "activity": "cooking",
+		    "startTimeActivity": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
+		    "endTimeActivity": "Fri Feb 07 2013 13:00:00 GMT-0500 (EST)",
+		    "location": "kitchen"
+		  },
+		  {
+		    "activity": "cooking",
+		    "startTimeActivity": "Fri Feb 07 2013 11:00:00 GMT-0500 (EST)",
+		    "endTimeActivity": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
+		    "location": "kitchen"
+		  },
+		  {
+		    "activity": "dancing",
+		    "startTimeActivity": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
+		    "endTimeActivity": "Fri Feb 07 2013 13:00:00 GMT-0500 (EST)",
+		    "location": "living"
+		  },
+		  {
+		    "activity": "cooking",
+		    "startTimeActivity": "Fri Feb 07 2013 14:00:00 GMT-0500 (EST)",
+		    "endTimeActivity": "Fri Feb 07 2013 15:00:00 GMT-0500 (EST)",
+		    "location": "kitchen"
+		  },
+		  {
+		    "activity": "cooking",
+		    "startTimeActivity": "Fri Feb 07 2013 15:00:00 GMT-0500 (EST)",
+		    "endTimeActivity": "Fri Feb 07 2013 16:30:00 GMT-0500 (EST)",
+		    "location": "kitchen"
+		  },
+		  {
+		    "activity": "cooking",
+		    "startTimeActivity": "Fri Feb 07 2013 16:00:00 GMT-0500 (EST)",
+		    "endTimeActivity": "Fri Feb 07 2013 17:00:00 GMT-0500 (EST)",
+		    "location": "kitchen"
+		  }
+		]
+
 def getActivityTimes(sensor, location, sensorDict, locationDict):
     activityDict = {}
     if sensor == 'Stove' and location == 'The Kitchen':
@@ -153,6 +193,119 @@ def getAllDevicesAtDate(date):
     #print(deviceActivationList)
     #print(deviceDict.keys())
     return deviceList
+	
+#	return [
+#		  {
+#		    "location": "kitchen",
+#		    "startTimeLocation": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
+#		    "endTimeLocation": "Fri Feb 07 2013 13:00:00 GMT-0500 (EST)"
+#		  },
+#		  {
+#		    "location": "kitchen",
+#		    "startTimeLocation": "Fri Feb 07 2013 11:00:00 GMT-0500 (EST)",
+#		    "endTimeLocation": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)"
+#		  },
+#		  {
+#		    "location": "living",
+#		    "startTimeLocation": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
+#		    "endTimeLocation": "Fri Feb 07 2013 13:00:00 GMT-0500 (EST)"
+#		  },
+#		  {
+#		    "location": "living",
+#		    "startTimeLocation": "Fri Feb 07 2013 14:00:00 GMT-0500 (EST)",
+#		    "endTimeLocation": "Fri Feb 07 2013 15:00:00 GMT-0500 (EST)"
+#		  },
+#		  {
+#		    "location": "kitchen",
+#		    "startTimeLocation": "Fri Feb 07 2013 15:00:00 GMT-0500 (EST)",
+#		    "endTimeLocation": "Fri Feb 07 2013 16:30:00 GMT-0500 (EST)"
+#		  },
+#		  {
+#		    "location": "living",
+#		    "startTimeLocation": "Fri Feb 07 2013 16:00:00 GMT-0500 (EST)",
+#		    "endTimeLocation": "Fri Feb 07 2013 17:00:00 GMT-0500 (EST)"
+#		  }
+#		]
+#
+#
+#def getAllDevicesAtDate(date):
+#	return [
+#		  {
+#		    "sensor": "stove",
+#		    "startTimeSensor": "Fri Feb 07 2013 08:00:00 GMT-0500 (EST)",
+#		    "endTimeSensor": "Fri Feb 07 2013 09:00:00 GMT-0500 (EST)",
+#		    "location": "kitchen"
+#		  },
+#		  {
+#		    "sensor": "microwave",
+#		    "startTimeSensor": "Fri Feb 07 2013 09:00:00 GMT-0500 (EST)",
+#		    "endTimeSensor": "Fri Feb 07 2013 10:00:00 GMT-0500 (EST)",
+#		    "location": "kitchen"
+#		  },
+#		  {
+#		    "sensor": "TV",
+#		    "startTimeSensor": "Fri Feb 07 2013 10:00:00 GMT-0500 (EST)",
+#		    "endTimeSensor": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
+#		    "location": "living"
+#		  },
+#		  {
+#		    "sensor": "Xbox",
+#		    "startTimeSensor": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
+#		    "endTimeSensor": "Fri Feb 07 2013 14:00:00 GMT-0500 (EST)",
+#		    "location": "living"
+#		  },
+#		  {
+#		    "sensor": "TV",
+#		    "startTimeSensor": "Fri Feb 07 2013 14:00:00 GMT-0500 (EST)",
+#		    "endTimeSensor": "Fri Feb 07 2013 15:00:00 GMT-0500 (EST)",
+#		    "location": "kitchen"
+#		  },
+#		  {
+#		    "sensor": "stove",
+#		    "startTimeSensor": "Fri Feb 07 2013 08:00:00 GMT-0500 (EST)",
+#		    "endTimeSensor": "Fri Feb 07 2013 08:30:00 GMT-0500 (EST)",
+#		    "location": "kitchen"
+#		  },
+#		  {
+#		    "sensor": "TEST",
+#		    "startTimeSensor": "Fri Feb 07 2013 10:00:00 GMT-0500 (EST)",
+#		    "endTimeSensor": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
+#		    "location": "kitchen"
+#		  }
+#		]
+#
+#	command = """SELECT DeviceID, DevicePlugNumber, WhatsPluggedIn, SensorID FROM DeviceSensors WHERE RecordStatus='A'"""
+#	devices = getCursor().execute(command).fetchall()
+#	deviceActivationList = []
+#	for device in devices:
+#		deviceID = device[0]
+#		devicePlugNumber = device[1]
+#		label = device[2]
+#		transmissions = getDeviceAtDate(deviceID, date)
+#		index = 0
+#		startTime = [None]
+#		endTime = [None]
+#		time = None
+#		for transmission in transmissions:
+#			time = transmission[6]
+#			if transmission[devicePlugNumber] > 0 and not startTime[index]:
+#				startTime[index] = time
+#				startTime.append(None)
+#			elif startTime[index] and transmission[devicePlugNumber] <= 0 and not endTime[index]:
+#				endTime[index] = time
+#				endTime.append(None)
+#				index += 1
+#
+#		
+#		if startTime[index] and index < len(endTime) and not endTime[index]:
+#			endTime[index] = time
+#			index += 1
+#
+#		for i in range(index):
+#			deviceActivationList.append([label, startTime[i], endTime[i]])
+#
+#	#print(deviceActivationList)
+#	return deviceActivationList
 
 def getDeviceAtDate(deviceID, date):
 	date = date.strftime('%Y-%m-%d')

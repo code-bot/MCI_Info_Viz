@@ -10,31 +10,15 @@
 var timeScale
 var colorScale
 var svg = d3.select('svg');
-d3.csv('activityData.csv',
-    // Load data and use this function to process each row
-    function(row) {
-        return {
-            'sensor': row['sensor'],
-            'activity': row['activity'],
-            'startTime': new Date(row['startTime']),
-            'endTime': new Date(row['endTime']),
-            'location': row['location'],
-        };
-    },
-    function(error, dataset) {
-        // Log and return from an error
-        if(error) {
-            console.error(error);
-            return;
-        }
+
+var dataset = appConfig.dataset;
+
+console.log(dataset);
 
 
-    console.log(dataset);
-
-// sort data by activity 
 function render(d3Comparator) {
     if(d3Comparator) dataset = dataset.sort(function(a, b) {
-        return d3[d3Comparator](a.activity, b.activity);
+        return d3[d3Comparator](a.location, b.location);
     });
 }
 render('ascending');
@@ -42,17 +26,15 @@ render('ascending');
 
 taskArray = dataset;
 
-
-// x axis - time scale
 timeScale = d3.scaleTime()
-        .domain([d3.min(taskArray, function(d) {return (d.startTime);}),
-                 d3.max(taskArray, function(d) {return (d.endTime);})])
+        .domain([d3.min(taskArray, function(d) {return new Date(d.startTimeLocation);}),
+                 d3.max(taskArray, function(d) {return new Date(d.endTimeLocation);})])
         .range([0,w-150]);
 
 var categories = new Array();
 
 for (var i = 0; i < taskArray.length; i++){
-    categories.push(taskArray[i].activity);
+    categories.push(taskArray[i].location);
 }
 
 var catsUnfiltered = categories; //for vert labels
@@ -63,13 +45,12 @@ console.log(categories);
 makeGant(taskArray, w, h);
 
 var title = svg.append("text")
-              .text("Patient's Activity")
-              .attr("x", w/2)
-              .attr("y", 25)
-              .attr("text-anchor", "middle")
-              .attr("font-size", 18)
-              .attr("fill", "#009FFC");
-
+.text(appConfig.title)
+.attr("x", w/2)
+.attr("y", 25)
+.attr("text-anchor", "middle")
+.attr("font-size", 18)
+.attr("fill", "#009FFC");
 
 
 function makeGant(tasks, pageWidth, pageHeight){
@@ -78,7 +59,7 @@ var barHeight = 20;
 var gap = barHeight + 4;
 var topPadding = 75;
 var sidePadding = 75;
-
+var smallBaHeight = 10;
 colorScale = d3.scaleLinear()
     .domain([0, categories.length])
     .range(["#F0B27A", "#85C1E9"])
@@ -87,13 +68,17 @@ colorScale = d3.scaleLinear()
 makeGrid(sidePadding, topPadding, pageWidth, pageHeight);
 drawRects(tasks, gap, topPadding, sidePadding, barHeight, colorScale, pageWidth, pageHeight);
 vertLabels(gap, topPadding, sidePadding, barHeight, colorScale);
-
+drawRects2(tasks, gap, topPadding, sidePadding, smallBaHeight, colorScale, pageWidth, pageHeight);
 }
 
 
+var bigRects
+var rectangles
+
+// draw bigger rectangle
 function drawRects(theArray, theGap, theTopPad, theSidePad, theBarHeight, theColorScale, w, h){
 
-var bigRects = svg.append("g")
+bigRects = svg.append("g")
     .selectAll("rect")
    .data(theArray)
    .enter()
@@ -109,7 +94,7 @@ var bigRects = svg.append("g")
    .attr("stroke", "none")
    .attr("fill", function(d){
     for (var i = 0; i < categories.length; i++){
-        if (d.activity == categories[i]){
+        if (d.location == categories[i]){
           return d3.rgb(theColorScale(i));
         }
     }
@@ -117,98 +102,40 @@ var bigRects = svg.append("g")
    .attr("opacity", 0.2);
 
 
-     var rectangles = svg.append('g')
+      rectangles = svg.append('g')
      .selectAll("rect")
      .data(theArray)
      .enter();
+}
 
+// draw location rectangles
+function drawRects2(theArray, theGap, theTopPad, theSidePad, theBarHeight, theColorScale, w, h){
+      var rectangles = svg.append('g')
+     .selectAll("rect")
+     .data(theArray)
+     .enter();
 
    var innerRects = rectangles.append("rect")
              .attr("rx", 3)
              .attr("ry", 3)
              .attr("x", function(d){
-              return timeScale((d.startTime)) + theSidePad;
+              return timeScale(new Date(d.startTimeLocation)) + theSidePad;
               })
              .attr("y", function(d, i){
                 return i*theGap + theTopPad;
             })
              .attr("width", function(d){
-                return (timeScale((d.endTime))-timeScale((d.startTime)));
+                return (timeScale(new Date(d.endTimeLocation))-timeScale(new Date(d.startTimeLocation)));
              })
              .attr("height", theBarHeight)
              .attr("stroke", "none")
-             .attr("fill", function(d){
-              for (var i = 0; i < categories.length; i++){
-                  if (d.activity == categories[i]){
-                    return d3.rgb(theColorScale(i));
-                  }
-              }
-             })
-   
-
-         var rectText = rectangles.append("text")
-               .text(function(d){
-                return d.task;
-               })
-               .attr("x", function(d){
-                return (timeScale((d.endTime))-timeScale((d.startTime)))/2 + timeScale((d.startTime)) + theSidePad;
-                })
-               .attr("y", function(d, i){
-                  return i*theGap + 14+ theTopPad;
-              })
-               .attr("font-size", 11)
-               .attr("text-anchor", "middle")
-               .attr("text-height", theBarHeight)
-               .attr("fill", "#fff");
-
-
-rectText.on('mouseover', function(e) {
- // console.log(this.x.animVal.getItem(this));
-               var tag = "";
-
-         if (d3.select(this).data()[0].details != undefined){
-          tag = "Sensor: " + d3.select(this).data()[0].sensor + "<br/>" + 
-                "Activity: " + d3.select(this).data()[0].activity + "<br/>" + 
-                "Starts: " + d3.select(this).data()[0].startTime + "<br/>" + 
-                "Ends: " + d3.select(this).data()[0].endTime + "<br/>" + 
-                "Location: " + d3.select(this).data()[0].location;
-         } else {
-          tag = "Sensot: " + d3.select(this).data()[0].sensor + "<br/>" + 
-                "Activity: " + d3.select(this).data()[0].activity + "<br/>" + 
-                "Starts: " + d3.select(this).data()[0].startTime + "<br/>" + 
-                "Ends: " + d3.select(this).data()[0].endTime;
-         }
-         var output = document.getElementById("tag");
-
-          var x = this.x.animVal.getItem(this) + "px";
-          var y = this.y.animVal.getItem(this) + 25 + "px";
-
-         output.innerHTML = tag;
-         output.style.top = y;
-         output.style.left = x;
-         output.style.display = "block";
-       }).on('mouseout', function() {
-         var output = document.getElementById("tag");
-         output.style.display = "none";
-             });
-
-
-innerRects.on('mouseover', function(e) {
+             .attr("fill", '#000000');
+    innerRects.on('mouseover', function(e) {
 
          var tag = "";
-
-         if (d3.select(this).data()[0].details != undefined){
-          tag = "Sensor: " + d3.select(this).data()[0].sensor + "<br/>" + 
-                "Activity: " + d3.select(this).data()[0].activity + "<br/>" + 
-                "Starts: " + d3.select(this).data()[0].startTime + "<br/>" + 
-                "Ends: " + d3.select(this).data()[0].endTime + "<br/>" + 
-                "Location: " + d3.select(this).data()[0].location;
-         } else {
-          tag = "Sensor: " + d3.select(this).data()[0].sensor + "<br/>" + 
-                "Activity: " + d3.select(this).data()[0].activity + "<br/>" + 
-                "Starts: " + d3.select(this).data()[0].startTime + "<br/>" + 
-                "Ends: " + d3.select(this).data()[0].endTime;
-         }
+          tag = "Location: " + d3.select(this).data()[0].location + "<br/>" + 
+                "Starts: " + d3.select(this).data()[0].startTimeLocation + "<br/>" + 
+                "Ends: " + d3.select(this).data()[0].endTimeLocation;
          var output = document.getElementById("tag");
 
          var x = (this.x.animVal.value + this.width.animVal.value/2) + "px";
@@ -222,16 +149,12 @@ innerRects.on('mouseover', function(e) {
          var output = document.getElementById("tag");
          output.style.display = "none";
 
- });
-
-
+});
 
 }
 
 
 function makeGrid(theSidePad, theTopPad, w, h){
-
-
 var xAxis = d3.axisBottom(timeScale)
     .ticks(8)
     .tickSize(-h+theTopPad+20, 0, 0)
@@ -315,5 +238,3 @@ function getCounts(arr) {
 function getCount(word, arr) {
     return getCounts(arr)[word] || 0;
 }
-
-});
