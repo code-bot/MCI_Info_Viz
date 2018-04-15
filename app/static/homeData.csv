@@ -1,0 +1,90 @@
+DeviceID,Watts,TimeStamp,Name,DeviceID,Watts,TimeStamp,Name,DeviceID,Watts,TimeStamp,Name,DeviceID,Watts,TimeStamp,Name
+43578-4,0,Apr 12 2018 08:38:54:703AM,Stove,43536-3,0,Apr 12 2018 08:38:54:703AM,TV,49943,0,Apr 12 2018 08:38:54:703AM,Toilet,43578-5,0,Apr 12 2018 08:38:54:703AM,Microwave
+43578-4,0,Apr 12 2018 08:55:54:703AM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 12 2018 09:00:54:703AM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 12 2018 09:10:54:703AM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 12 2018 09:20:54:703AM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 12 2018 09:30:54:703AM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 12 2018 09:40:54:703AM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 12 2018 09:50:54:703AM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 12 2018 11:50:54:703AM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 12 2018 12:00:54:703PM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 12 2018 01:00:54:703PM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 12 2018 02:00:54:703PM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 12 2018 05:00:54:703PM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 12 2018 05:20:54:703PM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 13 2018 08:20:54:703AM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 13 2018 08:50:54:703AM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 13 2018 09:10:54:703AM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 13 2018 11:10:54:703AM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 13 2018 11:30:54:703AM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 13 2018 11:50:54:703AM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 13 2018 12:00:54:703PM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 13 2018 05:00:54:703PM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 13 2018 05:10:54:703PM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 13 2018 05:30:54:703PM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 13 2018 05:50:54:703PM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 14 2018 08:25:54:703AM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 14 2018 09:00:54:703AM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 14 2018 09:20:54:703AM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 14 2018 09:30:54:703AM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 14 2018 11:30:54:703AM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 14 2018 11:50:54:703AM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 14 2018 12:10:54:703PM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,Apr 14 2018 05:10:54:703PM,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave
+43578-4,0,,Stove,43536-3,0,,TV,49943,0,,Toilet,43578-5,0,,Microwave

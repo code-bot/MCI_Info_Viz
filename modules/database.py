@@ -1,5 +1,6 @@
 import pyodbc
 from config import Config
+import datetime
 
 _conn = None
 
@@ -33,43 +34,125 @@ def closeConnection():
 			_conn = None
 
 def getActivityTimes(sensor, location, sensorDict, locationDict):
-	pass
+    activityDict = {}
+    if sensor == 'Stove' and location == 'The Kitchen':
+        #activity = cooking
+        activityDict['Cooking'] = []
+        for senTimes in sensorDict[sensor]:
+            for locTimes in locationDict[location]:
+                activityDict['Cooking'] = locTimes
+    return activityDict
 
 def getAllLocationsAtDate(date):
-	pass
+    locationList = []
+    tagID = 56080 #tag 16
+    command = """SELECT ID, RoomName FROM Rooms"""
+    rooms = getCursor().execute(command).fetchall()
+    for room in rooms:        
+        index = 0
+        startTime = [None]
+        endTime = [None]
+        time = None
+        
+        transmissions = getLocationAtDate(tagID,date)
+        
+        for j in range(1,len(transmissions)):
+            transmission = transmissions[j]
+            time = transmission[1]
+            currRoom = transmission[0]
+            prevRoom = transmissions[j-1][0]
+            if currRoom == room[0] and not startTime[index]:
+                startTime[index] = time
+                startTime.append(None)
+                #print(startTime[index])
+            elif currRoom != prevRoom and not endTime[index] and startTime[index]:
+                endTime[index] = time
+                #print(endTime[index])
+                endTime.append(None)
+                index +=1
+            
+        if startTime[index] and not endTime[index]:
+            endTime[index] = time
+            index += 1
+        
+        for i in range(index):
+            #print(endTime[i]-startTime[i])
+            locationDict = {}
+            if (endTime[i]-startTime[i])>datetime.timedelta(minutes=1):
+                    locationDict['location'] = room[1]
+                    locationDict['startTime'] = startTime[i]
+                    locationDict['endTime'] = endTime[i]
+                    locationList.append(locationDict)
+            
+    return locationList
 
 def getAllDevicesAtDate(date):
-	command = """SELECT DeviceID, DevicePlugNumber, WhatsPluggedIn, SensorID FROM DeviceSensors WHERE RecordStatus='A'"""
-	devices = getCursor().execute(command).fetchall()
-	deviceActivationList = []
-	for device in devices:
-		deviceID = device[0]
-		devicePlugNumber = device[1]
-		label = device[2]
-		transmissions = getDeviceAtDate(deviceID, date)
-		index = 0
-		startTime = [None]
-		endTime = [None]
-		time = None
-		for transmission in transmissions:
-			time = transmission[6]
-			if transmission[devicePlugNumber] > 0 and not startTime[index]:
-				startTime[index] = time
-				startTime.append(None)
-			elif transmission[devicePlugNumber] <= 0 and not endTime[index]:
-				endTime[index] = time
-				endTime.append(None)
-				index += 1
-
-		if startTime[index] and not endTime[index]:
-			endTime[index] = time
-			index += 1
-
-		for i in range(index):
-			deviceActivationList.append([label, startTime[i], endTime[i]])
-
-	#print(deviceActivationList)
-	return deviceActivationList
+    deviceList = []
+    command = """SELECT DeviceID, DevicePlugNumber, WhatsPluggedIn, SensorID FROM DeviceSensors WHERE RecordStatus='A'"""
+    devices = getCursor().execute(command).fetchall()
+    #map deviceID+plug to device name (later users can input name into database)
+    deviceMap = {}
+    deviceMap[43536] = {3:'TV',5:'Xbox360'}
+    deviceMap[43578] = {4:'Stove'}
+    deviceMap[49943] = {4:'Toilet'}
+    #deviceActivationList = []
+    #print(date)
+    #print(datetime.datetime.today())
+    deviceDict = {}
+    threshold = 20; #set watts threshold so you don't pick up weird stuff
+    for device in devices:
+        deviceID = device[0]
+        devicePlugNumber = device[1]
+        #if device is in device map assign proper label
+        if deviceID in deviceMap.keys():
+            if devicePlugNumber in deviceMap[deviceID].keys():
+                label = deviceMap[deviceID][devicePlugNumber]
+            else:
+                continue
+        else:
+            continue
+        #print(label)
+        transmissions = getDeviceAtDate(deviceID, date)
+        
+        index = 0
+        startTime = [None]
+        endTime = [None]
+        time = None
+        for j in range(1,len(transmissions)):
+            transmission = transmissions[j]
+            watts = transmission[devicePlugNumber]
+            prevWatts = transmissions[j-1][devicePlugNumber]
+#            if deviceID == 43536 and devicePlugNumber == 3:
+                #print(watts - prevWatts)
+            time = transmission[6]
+            if (watts - prevWatts) > threshold and not startTime[index]:
+                startTime[index] = time
+                #print(startTime[index])
+                startTime.append(None)
+            elif (watts - prevWatts) < -threshold and not endTime[index] and startTime[index]:
+                endTime[index] = time
+                #print(endTime[index])
+                endTime.append(None)
+                index += 1
+        
+        if startTime[index] and not endTime[index]:
+            endTime[index] = time
+            index += 1
+        
+        
+        for i in range(index):
+            #print(endTime[i]-startTime[i])
+            deviceDict = {}
+            if (endTime[i]-startTime[i])>datetime.timedelta(minutes=4):
+                deviceDict['device'] = label
+                deviceDict['startTime'] = startTime[i]
+                deviceDict['endTime'] = endTime[i]
+                deviceList.append(deviceDict)
+            #deviceActivationList.append([label, startTime[i], endTime[i]])
+    
+    #print(deviceActivationList)
+    #print(deviceDict.keys())
+    return deviceList
 
 def getDeviceAtDate(deviceID, date):
 	date = date.strftime('%Y-%m-%d')
@@ -83,4 +166,9 @@ def getDeviceAtDate(deviceID, date):
 	return transmissions
 
 def getLocationAtDate(locationID, date):
-	pass
+    date = date.strftime('%Y-%m-%d')
+    command = """SELECT RoomID, EndOfMinuteInterval FROM tbl_PTagCalculatedLocation
+              WHERE Convert(date, EndOfMinuteInterval)=Convert(date, '{}') AND PTagID={}
+              ORDER BY EndOfMinuteInterval ASC""".format(date,locationID)
+    transmissions = getCursor().execute(command).fetchall()
+    return transmissions
