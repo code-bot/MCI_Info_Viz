@@ -11,38 +11,88 @@ var timeScale
 var colorScale
 var svg = d3.select('svg');
 
+// sensor data 
+ var dataset = [
+  {
+    "sensor": "stove",
+    "startTimeSensor": "Fri Feb 07 2013 08:00:00 GMT-0500 (EST)",
+    "endTimeSensor": "Fri Feb 07 2013 09:00:00 GMT-0500 (EST)",
+    "location": "kitchen"
+  },
+  {
+    "sensor": "microwave",
+    "startTimeSensor": "Fri Feb 07 2013 09:00:00 GMT-0500 (EST)",
+    "endTimeSensor": "Fri Feb 07 2013 10:00:00 GMT-0500 (EST)",
+    "location": "kitchen"
+  },
+  {
+    "sensor": "TV",
+    "startTimeSensor": "Fri Feb 07 2013 10:00:00 GMT-0500 (EST)",
+    "endTimeSensor": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
+    "location": "living"
+  },
+  {
+    "sensor": "Xbox",
+    "startTimeSensor": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
+    "endTimeSensor": "Fri Feb 07 2013 14:00:00 GMT-0500 (EST)",
+    "location": "living"
+  },
+  {
+    "sensor": "TV",
+    "startTimeSensor": "Fri Feb 07 2013 14:00:00 GMT-0500 (EST)",
+    "endTimeSensor": "Fri Feb 07 2013 15:00:00 GMT-0500 (EST)",
+    "location": "kitchen"
+  },
+  {
+    "sensor": "stove",
+    "startTimeSensor": "Fri Feb 07 2013 08:00:00 GMT-0500 (EST)",
+    "endTimeSensor": "Fri Feb 07 2013 08:30:00 GMT-0500 (EST)",
+    "location": "kitchen"
+  },
+  {
+    "sensor": "TEST",
+    "startTimeSensor": "Fri Feb 07 2013 10:00:00 GMT-0500 (EST)",
+    "endTimeSensor": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
+    "location": "kitchen"
+  }
+]
 
-
-var dataset = [
+// location data
+var dataset2 = [
   {
     "location": "kitchen",
-    "startTimeLocation": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
-    "endTimeLocation": "Fri Feb 07 2013 13:00:00 GMT-0500 (EST)"
-  },
-  {
-    "location": "kitchen",
-    "startTimeLocation": "Fri Feb 07 2013 11:00:00 GMT-0500 (EST)",
-    "endTimeLocation": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)"
-  },
-  {
-    "location": "living",
-    "startTimeLocation": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
-    "endTimeLocation": "Fri Feb 07 2013 13:00:00 GMT-0500 (EST)"
-  },
-  {
-    "location": "living",
-    "startTimeLocation": "Fri Feb 07 2013 14:00:00 GMT-0500 (EST)",
-    "endTimeLocation": "Fri Feb 07 2013 15:00:00 GMT-0500 (EST)"
+    "startTimeLocation": "Fri Feb 07 2013 08:30:00 GMT-0500 (EST)",
+    "endTimeLocation": "Fri Feb 07 2013 09:30:00 GMT-0500 (EST)"
   },
   {
     "location": "kitchen",
-    "startTimeLocation": "Fri Feb 07 2013 15:00:00 GMT-0500 (EST)",
-    "endTimeLocation": "Fri Feb 07 2013 16:30:00 GMT-0500 (EST)"
+    "startTimeLocation": "Fri Feb 07 2013 09:30:00 GMT-0500 (EST)",
+    "endTimeLocation": "Fri Feb 07 2013 10:30:00 GMT-0500 (EST)"
   },
   {
     "location": "living",
-    "startTimeLocation": "Fri Feb 07 2013 16:00:00 GMT-0500 (EST)",
-    "endTimeLocation": "Fri Feb 07 2013 17:00:00 GMT-0500 (EST)"
+    "startTimeLocation": "Fri Feb 07 2013 10:30:00 GMT-0500 (EST)",
+    "endTimeLocation": "Fri Feb 07 2013 12:30:00 GMT-0500 (EST)"
+  },
+  {
+    "location": "living",
+    "startTimeLocation": "Fri Feb 07 2013 12:30:00 GMT-0500 (EST)",
+    "endTimeLocation": "Fri Feb 07 2013 14:30:00 GMT-0500 (EST)"
+  },
+  {
+    "location": "living",
+    "startTimeLocation": "Fri Feb 07 2013 14:30:00 GMT-0500 (EST)",
+    "endTimeLocation": "Fri Feb 07 2013 15:30:00 GMT-0500 (EST)"
+  },
+  {
+    "location": "kitchen",
+    "startTimeLocation": "Fri Feb 07 2013 08:30:00 GMT-0500 (EST)",
+    "endTimeLocation": "Fri Feb 07 2013 08:30:00 GMT-0500 (EST)"
+  },
+  {
+    "location": "living",
+    "startTimeLocation": "Fri Feb 07 2013 10:30:00 GMT-0500 (EST)",
+    "endTimeLocation": "Fri Feb 07 2013 12:30:00 GMT-0500 (EST)"
   }
 ];
 
@@ -59,9 +109,10 @@ render('ascending');
 
 taskArray = dataset;
 
+
 timeScale = d3.scaleTime()
-        .domain([d3.min(taskArray, function(d) {return new Date(d.startTimeLocation);}),
-                 d3.max(taskArray, function(d) {return new Date(d.endTimeLocation);})])
+        .domain([d3.min(taskArray, function(d) {return new Date(d.startTimeSensor);}),
+                 d3.max(taskArray, function(d) {return new Date(d.endTimeSensor);})])
         .range([0,w-150]);
 
 var categories = new Array();
@@ -78,12 +129,13 @@ console.log(categories);
 makeGant(taskArray, w, h);
 
 var title = svg.append("text")
-.text("Patient's Location")
+.text("Active Sensors and Patient's Location")
 .attr("x", w/2)
 .attr("y", 25)
 .attr("text-anchor", "middle")
 .attr("font-size", 18)
 .attr("fill", "#009FFC");
+
 
 
 function makeGant(tasks, pageWidth, pageHeight){
@@ -101,17 +153,17 @@ colorScale = d3.scaleLinear()
 makeGrid(sidePadding, topPadding, pageWidth, pageHeight);
 drawRects(tasks, gap, topPadding, sidePadding, barHeight, colorScale, pageWidth, pageHeight);
 vertLabels(gap, topPadding, sidePadding, barHeight, colorScale);
-drawRects2(tasks, gap, topPadding, sidePadding, smallBaHeight, colorScale, pageWidth, pageHeight);
-}
+drawRects2(dataset2, gap, topPadding, sidePadding, smallBaHeight, colorScale, pageWidth, pageHeight);
 
+}
 
 var bigRects
 var rectangles
 
-// draw bigger rectangle
+// draw bigger rectabgles + rectangles for sensors
 function drawRects(theArray, theGap, theTopPad, theSidePad, theBarHeight, theColorScale, w, h){
 
-bigRects = svg.append("g")
+var bigRects = svg.append("g")
     .selectAll("rect")
    .data(theArray)
    .enter()
@@ -135,15 +187,61 @@ bigRects = svg.append("g")
    .attr("opacity", 0.2);
 
 
-      rectangles = svg.append('g')
+     var rectangles = svg.append('g')
      .selectAll("rect")
      .data(theArray)
      .enter();
+
+
+   var innerRects = rectangles.append("rect")
+             .attr("rx", 3)
+             .attr("ry", 3)
+             .attr("x", function(d){
+              return timeScale(new Date(d.startTimeSensor)) + theSidePad;
+              })
+             .attr("y", function(d, i){
+                return i*theGap + theTopPad;
+            })
+             .attr("width", function(d){
+                return (timeScale(new Date(d.endTimeSensor))-timeScale(new Date(d.startTimeSensor)));
+             })
+             .attr("height", theBarHeight)
+             .attr("stroke", "none")
+             .attr("fill", function(d){
+              for (var i = 0; i < categories.length; i++){
+                  if (d.location == categories[i]){
+                    return d3.rgb(theColorScale(i));
+                  }
+              }
+             })
+
+          innerRects.on('mouseover', function(e) {
+
+                   var tag = "";
+                    tag = "Sensor: " + d3.select(this).data()[0].sensor + "<br/>" + 
+                          "Starts: " + d3.select(this).data()[0].startTimeSensor + "<br/>" + 
+                          "Ends: " + d3.select(this).data()[0].endTimeSensor;
+                   var output = document.getElementById("tag");
+
+                   var x = (this.x.animVal.value + this.width.animVal.value/2) + "px";
+                   var y = this.y.animVal.value + 25 + "px";
+
+                   output.innerHTML = tag;
+                   output.style.top = y;
+                   output.style.left = x;
+                   output.style.display = "block";
+                 }).on('mouseout', function() {
+                   var output = document.getElementById("tag");
+                   output.style.display = "none";
+
+           });
 }
 
-// draw location rectangles
+
+
+// draw smaller rectangles for location
 function drawRects2(theArray, theGap, theTopPad, theSidePad, theBarHeight, theColorScale, w, h){
-      var rectangles = svg.append('g')
+       var rectangles = svg.append('g')
      .selectAll("rect")
      .data(theArray)
      .enter();
@@ -182,7 +280,7 @@ function drawRects2(theArray, theGap, theTopPad, theSidePad, theBarHeight, theCo
          var output = document.getElementById("tag");
          output.style.display = "none";
 
-});
+ });
 
 }
 
@@ -271,3 +369,5 @@ function getCounts(arr) {
 function getCount(word, arr) {
     return getCounts(arr)[word] || 0;
 }
+
+// });

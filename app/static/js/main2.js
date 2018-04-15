@@ -12,37 +12,43 @@ var colorScale
 var svg = d3.select('svg');
 
 
-
+// activity data
 var dataset = [
   {
-    "location": "kitchen",
-    "startTimeLocation": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
-    "endTimeLocation": "Fri Feb 07 2013 13:00:00 GMT-0500 (EST)"
+    "activity": "cooking",
+    "startTimeActivity": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
+    "endTimeActivity": "Fri Feb 07 2013 13:00:00 GMT-0500 (EST)",
+    "location": "kitchen"
   },
   {
-    "location": "kitchen",
-    "startTimeLocation": "Fri Feb 07 2013 11:00:00 GMT-0500 (EST)",
-    "endTimeLocation": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)"
+    "activity": "cooking",
+    "startTimeActivity": "Fri Feb 07 2013 11:00:00 GMT-0500 (EST)",
+    "endTimeActivity": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
+    "location": "kitchen"
   },
   {
-    "location": "living",
-    "startTimeLocation": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
-    "endTimeLocation": "Fri Feb 07 2013 13:00:00 GMT-0500 (EST)"
+    "activity": "dancing",
+    "startTimeActivity": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
+    "endTimeActivity": "Fri Feb 07 2013 13:00:00 GMT-0500 (EST)",
+    "location": "living"
   },
   {
-    "location": "living",
-    "startTimeLocation": "Fri Feb 07 2013 14:00:00 GMT-0500 (EST)",
-    "endTimeLocation": "Fri Feb 07 2013 15:00:00 GMT-0500 (EST)"
+    "activity": "cooking",
+    "startTimeActivity": "Fri Feb 07 2013 14:00:00 GMT-0500 (EST)",
+    "endTimeActivity": "Fri Feb 07 2013 15:00:00 GMT-0500 (EST)",
+    "location": "kitchen"
   },
   {
-    "location": "kitchen",
-    "startTimeLocation": "Fri Feb 07 2013 15:00:00 GMT-0500 (EST)",
-    "endTimeLocation": "Fri Feb 07 2013 16:30:00 GMT-0500 (EST)"
+    "activity": "cooking",
+    "startTimeActivity": "Fri Feb 07 2013 15:00:00 GMT-0500 (EST)",
+    "endTimeActivity": "Fri Feb 07 2013 16:30:00 GMT-0500 (EST)",
+    "location": "kitchen"
   },
   {
-    "location": "living",
-    "startTimeLocation": "Fri Feb 07 2013 16:00:00 GMT-0500 (EST)",
-    "endTimeLocation": "Fri Feb 07 2013 17:00:00 GMT-0500 (EST)"
+    "activity": "cooking",
+    "startTimeActivity": "Fri Feb 07 2013 16:00:00 GMT-0500 (EST)",
+    "endTimeActivity": "Fri Feb 07 2013 17:00:00 GMT-0500 (EST)",
+    "location": "kitchen"
   }
 ];
 
@@ -60,8 +66,8 @@ render('ascending');
 taskArray = dataset;
 
 timeScale = d3.scaleTime()
-        .domain([d3.min(taskArray, function(d) {return new Date(d.startTimeLocation);}),
-                 d3.max(taskArray, function(d) {return new Date(d.endTimeLocation);})])
+        .domain([d3.min(taskArray, function(d) {return new Date(d.startTimeActivity);}),
+                 d3.max(taskArray, function(d) {return new Date(d.endTimeActivity);})])
         .range([0,w-150]);
 
 var categories = new Array();
@@ -78,7 +84,7 @@ console.log(categories);
 makeGant(taskArray, w, h);
 
 var title = svg.append("text")
-.text("Patient's Location")
+.text("Patient's Activities")
 .attr("x", w/2)
 .attr("y", 25)
 .attr("text-anchor", "middle")
@@ -101,17 +107,15 @@ colorScale = d3.scaleLinear()
 makeGrid(sidePadding, topPadding, pageWidth, pageHeight);
 drawRects(tasks, gap, topPadding, sidePadding, barHeight, colorScale, pageWidth, pageHeight);
 vertLabels(gap, topPadding, sidePadding, barHeight, colorScale);
-drawRects2(tasks, gap, topPadding, sidePadding, smallBaHeight, colorScale, pageWidth, pageHeight);
 }
 
 
 var bigRects
 var rectangles
 
-// draw bigger rectangle
+// draw big rectangles + activity rectangles
 function drawRects(theArray, theGap, theTopPad, theSidePad, theBarHeight, theColorScale, w, h){
-
-bigRects = svg.append("g")
+var bigRects = svg.append("g")
     .selectAll("rect")
    .data(theArray)
    .enter()
@@ -135,55 +139,54 @@ bigRects = svg.append("g")
    .attr("opacity", 0.2);
 
 
-      rectangles = svg.append('g')
+     var rectangles = svg.append('g')
      .selectAll("rect")
      .data(theArray)
      .enter();
-}
 
-// draw location rectangles
-function drawRects2(theArray, theGap, theTopPad, theSidePad, theBarHeight, theColorScale, w, h){
-      var rectangles = svg.append('g')
-     .selectAll("rect")
-     .data(theArray)
-     .enter();
 
    var innerRects = rectangles.append("rect")
              .attr("rx", 3)
              .attr("ry", 3)
              .attr("x", function(d){
-              return timeScale(new Date(d.startTimeLocation)) + theSidePad;
+              return timeScale(new Date(d.startTimeActivity)) + theSidePad;
               })
              .attr("y", function(d, i){
                 return i*theGap + theTopPad;
             })
              .attr("width", function(d){
-                return (timeScale(new Date(d.endTimeLocation))-timeScale(new Date(d.startTimeLocation)));
+                return (timeScale(new Date(d.endTimeActivity))-timeScale(new Date(d.startTimeActivity)));
              })
              .attr("height", theBarHeight)
              .attr("stroke", "none")
-             .attr("fill", '#000000');
-    innerRects.on('mouseover', function(e) {
+             .attr("fill", function(d){
+              for (var i = 0; i < categories.length; i++){
+                  if (d.location == categories[i]){
+                    return d3.rgb(theColorScale(i));
+                  }
+              }
+             })
 
-         var tag = "";
-          tag = "Location: " + d3.select(this).data()[0].location + "<br/>" + 
-                "Starts: " + d3.select(this).data()[0].startTimeLocation + "<br/>" + 
-                "Ends: " + d3.select(this).data()[0].endTimeLocation;
-         var output = document.getElementById("tag");
+          innerRects.on('mouseover', function(e) {
 
-         var x = (this.x.animVal.value + this.width.animVal.value/2) + "px";
-         var y = this.y.animVal.value + 25 + "px";
+                   var tag = "";
+                    tag = "Activity: " + d3.select(this).data()[0].activity + "<br/>" + 
+                          "Starts: " + d3.select(this).data()[0].startTimeActivity + "<br/>" + 
+                          "Ends: " + d3.select(this).data()[0].endTimeActivity;
+                   var output = document.getElementById("tag");
 
-         output.innerHTML = tag;
-         output.style.top = y;
-         output.style.left = x;
-         output.style.display = "block";
-       }).on('mouseout', function() {
-         var output = document.getElementById("tag");
-         output.style.display = "none";
+                   var x = (this.x.animVal.value + this.width.animVal.value/2) + "px";
+                   var y = this.y.animVal.value + 25 + "px";
 
-});
+                   output.innerHTML = tag;
+                   output.style.top = y;
+                   output.style.left = x;
+                   output.style.display = "block";
+                 }).on('mouseout', function() {
+                   var output = document.getElementById("tag");
+                   output.style.display = "none";
 
+           });
 }
 
 
