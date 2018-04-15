@@ -56,12 +56,13 @@ def getAllDevicesAtDate(date):
 			if transmission[devicePlugNumber] > 0 and not startTime[index]:
 				startTime[index] = time
 				startTime.append(None)
-			elif transmission[devicePlugNumber] <= 0 and not endTime[index]:
+			elif startTime[index] and transmission[devicePlugNumber] <= 0 and not endTime[index]:
 				endTime[index] = time
 				endTime.append(None)
 				index += 1
 
-		if startTime[index] and not endTime[index]:
+		
+		if startTime[index] and index < len(endTime) and not endTime[index]:
 			endTime[index] = time
 			index += 1
 

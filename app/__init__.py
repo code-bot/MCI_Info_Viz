@@ -15,12 +15,12 @@ def activity():
 	# print(rooms)
 	# database.closeConnection()
 	#database.getAllDevicesAtDate(datetime.today())
-	print(database.getAllDevicesAtDate(datetime.today())[0])
+	
 
 	return render_template('home.html')
 
 @app.route('/viz')
 def viz():
-
+	
 
 	return render_template('index.html')
