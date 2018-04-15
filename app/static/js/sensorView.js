@@ -12,89 +12,10 @@ var colorScale
 var svg = d3.select('svg');
 
 // sensor data 
- var dataset = [
-  {
-    "sensor": "stove",
-    "startTimeSensor": "Fri Feb 07 2013 08:00:00 GMT-0500 (EST)",
-    "endTimeSensor": "Fri Feb 07 2013 09:00:00 GMT-0500 (EST)",
-    "location": "kitchen"
-  },
-  {
-    "sensor": "microwave",
-    "startTimeSensor": "Fri Feb 07 2013 09:00:00 GMT-0500 (EST)",
-    "endTimeSensor": "Fri Feb 07 2013 10:00:00 GMT-0500 (EST)",
-    "location": "kitchen"
-  },
-  {
-    "sensor": "TV",
-    "startTimeSensor": "Fri Feb 07 2013 10:00:00 GMT-0500 (EST)",
-    "endTimeSensor": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
-    "location": "living"
-  },
-  {
-    "sensor": "Xbox",
-    "startTimeSensor": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
-    "endTimeSensor": "Fri Feb 07 2013 14:00:00 GMT-0500 (EST)",
-    "location": "living"
-  },
-  {
-    "sensor": "TV",
-    "startTimeSensor": "Fri Feb 07 2013 14:00:00 GMT-0500 (EST)",
-    "endTimeSensor": "Fri Feb 07 2013 15:00:00 GMT-0500 (EST)",
-    "location": "kitchen"
-  },
-  {
-    "sensor": "stove",
-    "startTimeSensor": "Fri Feb 07 2013 08:00:00 GMT-0500 (EST)",
-    "endTimeSensor": "Fri Feb 07 2013 08:30:00 GMT-0500 (EST)",
-    "location": "kitchen"
-  },
-  {
-    "sensor": "TEST",
-    "startTimeSensor": "Fri Feb 07 2013 10:00:00 GMT-0500 (EST)",
-    "endTimeSensor": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
-    "location": "kitchen"
-  }
-]
+ var dataset = appConfig.dataset[0];
 
 // location data
-var dataset2 = [
-  {
-    "location": "kitchen",
-    "startTimeLocation": "Fri Feb 07 2013 08:30:00 GMT-0500 (EST)",
-    "endTimeLocation": "Fri Feb 07 2013 09:30:00 GMT-0500 (EST)"
-  },
-  {
-    "location": "kitchen",
-    "startTimeLocation": "Fri Feb 07 2013 09:30:00 GMT-0500 (EST)",
-    "endTimeLocation": "Fri Feb 07 2013 10:30:00 GMT-0500 (EST)"
-  },
-  {
-    "location": "living",
-    "startTimeLocation": "Fri Feb 07 2013 10:30:00 GMT-0500 (EST)",
-    "endTimeLocation": "Fri Feb 07 2013 12:30:00 GMT-0500 (EST)"
-  },
-  {
-    "location": "living",
-    "startTimeLocation": "Fri Feb 07 2013 12:30:00 GMT-0500 (EST)",
-    "endTimeLocation": "Fri Feb 07 2013 14:30:00 GMT-0500 (EST)"
-  },
-  {
-    "location": "living",
-    "startTimeLocation": "Fri Feb 07 2013 14:30:00 GMT-0500 (EST)",
-    "endTimeLocation": "Fri Feb 07 2013 15:30:00 GMT-0500 (EST)"
-  },
-  {
-    "location": "kitchen",
-    "startTimeLocation": "Fri Feb 07 2013 08:30:00 GMT-0500 (EST)",
-    "endTimeLocation": "Fri Feb 07 2013 08:30:00 GMT-0500 (EST)"
-  },
-  {
-    "location": "living",
-    "startTimeLocation": "Fri Feb 07 2013 10:30:00 GMT-0500 (EST)",
-    "endTimeLocation": "Fri Feb 07 2013 12:30:00 GMT-0500 (EST)"
-  }
-];
+var dataset2 = appConfig.dataset[1];
 
 console.log(dataset);
 

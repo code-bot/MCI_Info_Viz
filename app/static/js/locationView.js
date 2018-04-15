@@ -11,40 +11,7 @@ var timeScale
 var colorScale
 var svg = d3.select('svg');
 
-
-
-var dataset = [
-  {
-    "location": "kitchen",
-    "startTimeLocation": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
-    "endTimeLocation": "Fri Feb 07 2013 13:00:00 GMT-0500 (EST)"
-  },
-  {
-    "location": "kitchen",
-    "startTimeLocation": "Fri Feb 07 2013 11:00:00 GMT-0500 (EST)",
-    "endTimeLocation": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)"
-  },
-  {
-    "location": "living",
-    "startTimeLocation": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
-    "endTimeLocation": "Fri Feb 07 2013 13:00:00 GMT-0500 (EST)"
-  },
-  {
-    "location": "living",
-    "startTimeLocation": "Fri Feb 07 2013 14:00:00 GMT-0500 (EST)",
-    "endTimeLocation": "Fri Feb 07 2013 15:00:00 GMT-0500 (EST)"
-  },
-  {
-    "location": "kitchen",
-    "startTimeLocation": "Fri Feb 07 2013 15:00:00 GMT-0500 (EST)",
-    "endTimeLocation": "Fri Feb 07 2013 16:30:00 GMT-0500 (EST)"
-  },
-  {
-    "location": "living",
-    "startTimeLocation": "Fri Feb 07 2013 16:00:00 GMT-0500 (EST)",
-    "endTimeLocation": "Fri Feb 07 2013 17:00:00 GMT-0500 (EST)"
-  }
-];
+var dataset = appConfig.dataset;
 
 console.log(dataset);
 
@@ -78,7 +45,7 @@ console.log(categories);
 makeGant(taskArray, w, h);
 
 var title = svg.append("text")
-.text("Patient's Location")
+.text(appConfig.title)
 .attr("x", w/2)
 .attr("y", 25)
 .attr("text-anchor", "middle")

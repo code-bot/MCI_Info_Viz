@@ -1,0 +1,25 @@
+ <div id = "container">
+<div class = "svg"></div>
+<div id = "tag"></div>
+<link rel="stylesheet" href="../static/css/style.css">
+<script>
+window.appConfig = {
+	dataset: JSON.parse('{{dataset|safe}}'),
+	title: "{{title|safe}}"
+}
+</script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="../static/js/{{javascriptFile}}"></script>
+</div>
+<form id="vizOptions" name="vizOptions" action="/viz">
+	<select id="date" name="date">
+		{% for option in dateOptions %}
+		<option {% if option == date %}selected{% endif %} value={{option}}>{{option}}</option>
+		{% endfor %}
+	</select>
+	<input type="hidden" name="view" value={{view}}>
+	<button type="submit">Show</button>
+</form>
+<a href="/viz?view=location&date={{date}}">Patient's Location</a><br>
+<a href="/viz?view=sensor&date={{date}}">Active Sensors and Patient's Location</a><br>
+<a href="/viz?view=activity&date={{date}}">Patient's Activities</a><br>

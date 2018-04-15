@@ -13,44 +13,7 @@ var svg = d3.select('svg');
 
 
 // activity data
-var dataset = [
-  {
-    "activity": "cooking",
-    "startTimeActivity": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
-    "endTimeActivity": "Fri Feb 07 2013 13:00:00 GMT-0500 (EST)",
-    "location": "kitchen"
-  },
-  {
-    "activity": "cooking",
-    "startTimeActivity": "Fri Feb 07 2013 11:00:00 GMT-0500 (EST)",
-    "endTimeActivity": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
-    "location": "kitchen"
-  },
-  {
-    "activity": "dancing",
-    "startTimeActivity": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
-    "endTimeActivity": "Fri Feb 07 2013 13:00:00 GMT-0500 (EST)",
-    "location": "living"
-  },
-  {
-    "activity": "cooking",
-    "startTimeActivity": "Fri Feb 07 2013 14:00:00 GMT-0500 (EST)",
-    "endTimeActivity": "Fri Feb 07 2013 15:00:00 GMT-0500 (EST)",
-    "location": "kitchen"
-  },
-  {
-    "activity": "cooking",
-    "startTimeActivity": "Fri Feb 07 2013 15:00:00 GMT-0500 (EST)",
-    "endTimeActivity": "Fri Feb 07 2013 16:30:00 GMT-0500 (EST)",
-    "location": "kitchen"
-  },
-  {
-    "activity": "cooking",
-    "startTimeActivity": "Fri Feb 07 2013 16:00:00 GMT-0500 (EST)",
-    "endTimeActivity": "Fri Feb 07 2013 17:00:00 GMT-0500 (EST)",
-    "location": "kitchen"
-  }
-];
+var dataset = appConfig.dataset;
 
 console.log(dataset);
 
