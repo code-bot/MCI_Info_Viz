@@ -119,10 +119,10 @@ def getAllLocationsAtDate(date):
             #print(endTime[i]-startTime[i])
             locationDict = {}
             if (endTime[i]-startTime[i])>datetime.timedelta(minutes=1):
-                    locationDict['location'] = room[1]
-                    locationDict['startTime'] = startTime[i]
-                    locationDict['endTime'] = endTime[i]
-                    locationList.append(locationDict)
+                locationDict['location'] = room[1]
+                locationDict['startTimeLocation'] = startTime[i].strftime('%Y-%m-%d %H:%M:%S')
+                locationDict['endTimeLocation'] = endTime[i].strftime('%Y-%m-%d %H:%M:%S')
+                locationList.append(locationDict)
             
     return locationList
 
@@ -135,9 +135,6 @@ def getAllDevicesAtDate(date):
     deviceMap[43536] = {3:'TV',5:'Xbox360'}
     deviceMap[43578] = {4:'Stove'}
     deviceMap[49943] = {4:'Toilet'}
-    #deviceActivationList = []
-    #print(date)
-    #print(datetime.datetime.today())
     deviceDict = {}
     threshold = 20; #set watts threshold so you don't pick up weird stuff
     for device in devices:
@@ -148,9 +145,9 @@ def getAllDevicesAtDate(date):
             if devicePlugNumber in deviceMap[deviceID].keys():
                 label = deviceMap[deviceID][devicePlugNumber]
             else:
-                continue
+                label = device[2]
         else:
-            continue
+            label = device[2]
         #print(label)
         transmissions = getDeviceAtDate(deviceID, date)
         
@@ -185,8 +182,8 @@ def getAllDevicesAtDate(date):
             deviceDict = {}
             if (endTime[i]-startTime[i])>datetime.timedelta(minutes=4):
                 deviceDict['device'] = label
-                deviceDict['startTime'] = startTime[i]
-                deviceDict['endTime'] = endTime[i]
+                deviceDict['startTimeSensor'] = startTime[i].strftime('%Y-%m-%d %H:%M:%S')
+                deviceDict['endTimeSensor'] = endTime[i].strftime('%Y-%m-%d %H:%M:%S')
                 deviceList.append(deviceDict)
             #deviceActivationList.append([label, startTime[i], endTime[i]])
     

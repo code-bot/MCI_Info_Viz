@@ -42,6 +42,11 @@ def viz():
 		title = "Patient's Location"
 		vizFile = 'locationView.js'
 		vizData = database.getAllLocationsAtDate(date)
+		print(vizData)
+		# vizData = []
+		# for location, times in locationData.enumerate():
+		# 	for time in times:
+		# 		vizData.append({'location': location, 'startTime': time[0], 'endTime': time[1]})
 	elif viewType == 'activity':
 		title = "Patient's Activities"
 		vizFile = 'activityView.js'
@@ -50,7 +55,17 @@ def viz():
 		title = "Active Sensors and Patient's Location"
 		vizFile = 'sensorView.js'
 		vizData_sensors = database.getAllDevicesAtDate(date)
+		print(vizData_sensors)
 		vizData_location = database.getAllLocationsAtDate(date)
+
+		# for sensor, times in sensorData.enumerate():
+		# 	for time in times:
+		# 		vizData_sensors.append({'location': location, 'startTime': time[0], 'endTime': time[1]})
+
+		# for location, times in locationData.enumerate():
+		# 	for time in times:
+		# 		vizData_location.append({'location': location, 'startTime': time[0], 'endTime': time[1]})
+		
 		vizData = [vizData_sensors, vizData_location]
 	else:
 		return redirect('/viz')
