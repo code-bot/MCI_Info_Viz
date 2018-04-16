@@ -16,12 +16,8 @@ def activity():
 	# print(rooms)
 	# database.closeConnection()
 	#database.getAllDevicesAtDate(datetime.today())
-    sensorDict = database.getAllDevicesAtDate(datetime.datetime(2018,4,14,hour=16,minute=30,second=0,microsecond=0))
-    locDict = database.getAllLocationsAtDate(datetime.datetime(2018,4,14,hour=16,minute=30,second=0,microsecond=0))
-    print(sensorDict['TV'])
-    print(sensorDict['TV'][0])
-    print(locDict['The Kitchen'])
-    print(locDict['The Kitchen'][0])
+    sensorDictList = database.getAllDevicesAtDate(datetime.datetime(2018,4,14,hour=16,minute=30,second=0,microsecond=0))
+    locDictList = database.getAllLocationsAtDate(datetime.datetime(2018,4,14,hour=16,minute=30,second=0,microsecond=0))
     
     return render_template('home.html')
 

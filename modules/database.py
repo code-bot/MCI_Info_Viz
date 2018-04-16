@@ -73,15 +73,22 @@ def getAllActivities():
 		  }
 		]
 
-def getActivityTimes(sensor, location, sensorDict, locationDict):
-    activityDict = {}
-    if sensor == 'Stove' and location == 'The Kitchen':
-        #activity = cooking
-        activityDict['Cooking'] = []
-        for senTimes in sensorDict[sensor]:
-            for locTimes in locationDict[location]:
-                activityDict['Cooking'] = locTimes
-    return activityDict
+def getActivityTimes(sensorDictList, locationDictList):
+    activityTimes = []
+    for sensorDict in sensorDictList:
+        for locDict in locationDictList:
+            if sensorDict['startTime'] <= locDict['endTime'] and sensorDict['startTime'] >= locDict['startTime']:
+                if sensorDict['endTime'] <= locDict['endTime'] and sensorDict['endTime'] >= locDict['startTime']:
+                    activityTimes.append([sensorDict['startTime'],sensorDict['endTime']])
+                elif locDict['endTime'] <= sensorDict['endTime'] and locDict['endTime'] >= sensorDict['endTime']:
+                    activityTimes.append([sensorDict['startTime'],locDict['endTime']])
+            elif locDict['startTime'] <= sensorDict['endTime'] and locDict['startTime'] >= sensorDict['startTime']:
+                if locDict['endTime'] <= sensorDict['endTime'] and locDict['endTime'] >= sensorDict['endTime']:
+                    activityTimes.append([locDict['startTime'],locDict['endTime']])
+                elif sensorDict['endTime'] <= locDict['endTime'] and sensorDict['endTime'] >= locDict['startTime']:
+                    activityTimes.append([locDict['startTime'],sensorDict['endTime']])
+
+    return activityTimes
 
 def getAllLocationsAtDate(date):
     locationList = []
