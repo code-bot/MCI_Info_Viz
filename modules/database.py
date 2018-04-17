@@ -37,38 +37,38 @@ def getAllActivities():
 	return [
 		  {
 		    "activity": "cooking",
-		    "startTimeActivity": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
-		    "endTimeActivity": "Fri Feb 07 2013 13:00:00 GMT-0500 (EST)",
+		    "startTime": "Mon Apr 16 2018 12:00:00 GMT-0500 (EST)",
+		    "endTime": "Mon Apr 16 2018 13:00:00 GMT-0500 (EST)",
 		    "location": "kitchen"
 		  },
 		  {
 		    "activity": "cooking",
-		    "startTimeActivity": "Fri Feb 07 2013 11:00:00 GMT-0500 (EST)",
-		    "endTimeActivity": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
+		    "startTime": "Mon Apr 16 2018 11:00:00 GMT-0500 (EST)",
+		    "endTime": "Mon Apr 16 2018 12:00:00 GMT-0500 (EST)",
 		    "location": "kitchen"
 		  },
 		  {
 		    "activity": "dancing",
-		    "startTimeActivity": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
-		    "endTimeActivity": "Fri Feb 07 2013 13:00:00 GMT-0500 (EST)",
+		    "startTime": "Mon Apr 16 2018 12:00:00 GMT-0500 (EST)",
+		    "endTime": "Mon Apr 16 2018 13:00:00 GMT-0500 (EST)",
 		    "location": "living"
 		  },
 		  {
 		    "activity": "cooking",
-		    "startTimeActivity": "Fri Feb 07 2013 14:00:00 GMT-0500 (EST)",
-		    "endTimeActivity": "Fri Feb 07 2013 15:00:00 GMT-0500 (EST)",
+		    "startTime": "Mon Apr 16 2018 14:00:00 GMT-0500 (EST)",
+		    "endTime": "Mon Apr 16 2018 15:00:00 GMT-0500 (EST)",
 		    "location": "kitchen"
 		  },
 		  {
 		    "activity": "cooking",
-		    "startTimeActivity": "Fri Feb 07 2013 15:00:00 GMT-0500 (EST)",
-		    "endTimeActivity": "Fri Feb 07 2013 16:30:00 GMT-0500 (EST)",
+		    "startTime": "Mon Apr 16 2018 15:00:00 GMT-0500 (EST)",
+		    "endTime": "Mon Apr 16 2018 16:30:00 GMT-0500 (EST)",
 		    "location": "kitchen"
 		  },
 		  {
 		    "activity": "cooking",
-		    "startTimeActivity": "Fri Feb 07 2013 16:00:00 GMT-0500 (EST)",
-		    "endTimeActivity": "Fri Feb 07 2013 17:00:00 GMT-0500 (EST)",
+		    "startTime": "Mon Apr 16 2018 16:00:00 GMT-0500 (EST)",
+		    "endTime": "Mon Apr 16 2018 17:00:00 GMT-0500 (EST)",
 		    "location": "kitchen"
 		  }
 		]
@@ -120,8 +120,8 @@ def getAllLocationsAtDate(date):
             locationDict = {}
             if (endTime[i]-startTime[i])>datetime.timedelta(minutes=1):
                 locationDict['location'] = room[1]
-                locationDict['startTimeLocation'] = startTime[i].strftime('%Y-%m-%d %H:%M:%S')
-                locationDict['endTimeLocation'] = endTime[i].strftime('%Y-%m-%d %H:%M:%S')
+                locationDict['startTime'] = startTime[i].strftime('%Y-%m-%d %H:%M:%S')
+                locationDict['endTime'] = endTime[i].strftime('%Y-%m-%d %H:%M:%S')
                 locationList.append(locationDict)
             
     return locationList

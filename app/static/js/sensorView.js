@@ -1,7 +1,7 @@
   var w = 1000;
   var h = 400;
 
-  var svg = d3.selectAll(".svg")
+  var svg = d3.selectAll("#viz")
   .append("svg")
   .attr("width", w)
   .attr("height", h)

@@ -9,19 +9,6 @@ app.config.from_object('config.Config') # load config
 
 @app.route('/')
 def activity():
-
-	# # Sample SQL Server Query
-	# cursor = database.getCursor()
-	# rooms = cursor.execute("SELECT * FROM Rooms").fetchall();
-	# print(rooms)
-	# database.closeConnection()
-	#database.getAllDevicesAtDate(datetime.today())
-    sensorDict = database.getAllDevicesAtDate(datetime.datetime(2018,4,14,hour=16,minute=30,second=0,microsecond=0))
-    locDict = database.getAllLocationsAtDate(datetime.datetime(2018,4,14,hour=16,minute=30,second=0,microsecond=0))
-    print(sensorDict['TV'])
-    print(sensorDict['TV'][0])
-    print(locDict['The Kitchen'])
-    print(locDict['The Kitchen'][0])
     
     return render_template('home.html')
 
@@ -34,7 +21,7 @@ def viz():
 	dateStr = request.args.get('date', None)
 
 	if dateStr and dateStr != "None":
-		date = datetime.strptime(dateStr, '%Y-%m-%d')
+		date = datetime.strptime(dateStr, '%a, %B %d %Y')
 	else:
 		date = datetime.today()
 
@@ -42,11 +29,6 @@ def viz():
 		title = "Patient's Location"
 		vizFile = 'locationView.js'
 		vizData = database.getAllLocationsAtDate(date)
-		print(vizData)
-		# vizData = []
-		# for location, times in locationData.enumerate():
-		# 	for time in times:
-		# 		vizData.append({'location': location, 'startTime': time[0], 'endTime': time[1]})
 	elif viewType == 'activity':
 		title = "Patient's Activities"
 		vizFile = 'activityView.js'
@@ -55,16 +37,8 @@ def viz():
 		title = "Active Sensors and Patient's Location"
 		vizFile = 'sensorView.js'
 		vizData_sensors = database.getAllDevicesAtDate(date)
-		print(vizData_sensors)
 		vizData_location = database.getAllLocationsAtDate(date)
 
-		# for sensor, times in sensorData.enumerate():
-		# 	for time in times:
-		# 		vizData_sensors.append({'location': location, 'startTime': time[0], 'endTime': time[1]})
-
-		# for location, times in locationData.enumerate():
-		# 	for time in times:
-		# 		vizData_location.append({'location': location, 'startTime': time[0], 'endTime': time[1]})
 		
 		vizData = [vizData_sensors, vizData_location]
 	else:
