@@ -34,44 +34,44 @@ def closeConnection():
 			_conn = None
 
 def getAllActivities():
-	return [
-		  {
-		    "activity": "cooking",
-		    "startTimeActivity": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
-		    "endTimeActivity": "Fri Feb 07 2013 13:00:00 GMT-0500 (EST)",
-		    "location": "kitchen"
-		  },
-		  {
-		    "activity": "cooking",
-		    "startTimeActivity": "Fri Feb 07 2013 11:00:00 GMT-0500 (EST)",
-		    "endTimeActivity": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
-		    "location": "kitchen"
-		  },
-		  {
-		    "activity": "dancing",
-		    "startTimeActivity": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
-		    "endTimeActivity": "Fri Feb 07 2013 13:00:00 GMT-0500 (EST)",
-		    "location": "living"
-		  },
-		  {
-		    "activity": "cooking",
-		    "startTimeActivity": "Fri Feb 07 2013 14:00:00 GMT-0500 (EST)",
-		    "endTimeActivity": "Fri Feb 07 2013 15:00:00 GMT-0500 (EST)",
-		    "location": "kitchen"
-		  },
-		  {
-		    "activity": "cooking",
-		    "startTimeActivity": "Fri Feb 07 2013 15:00:00 GMT-0500 (EST)",
-		    "endTimeActivity": "Fri Feb 07 2013 16:30:00 GMT-0500 (EST)",
-		    "location": "kitchen"
-		  },
-		  {
-		    "activity": "cooking",
-		    "startTimeActivity": "Fri Feb 07 2013 16:00:00 GMT-0500 (EST)",
-		    "endTimeActivity": "Fri Feb 07 2013 17:00:00 GMT-0500 (EST)",
-		    "location": "kitchen"
-		  }
-		]
+return [
+          {
+            "activity": "sleeping",
+            "startTime": "Sat Apr 14 2018 00:00:00 GMT-0500 (EST)",
+            "endTime": "Sat Apr 14 2018 07:30:00 GMT-0500 (EST)",
+            "location": "bedroom"
+          },
+          {
+            "activity": "cooking",
+            "startTime": "Sat Apr 14 2018 08:15:00 GMT-0500 (EST)",
+            "endTime": "Sat Apr 14 2018 10:30:00 GMT-0500 (EST)",
+            "location": "kitchen"
+          },
+          {
+            "activity": "entertainment",
+            "startTime": "Sat Apr 14 2018 10:35:00 GMT-0500 (EST)",
+            "endTime": "Sat Apr 14 2018 13:00:00 GMT-0500 (EST)",
+            "location": "living"
+          },
+          {
+            "activity": "cooking",
+            "startTime": "Sat Apr 14 2018 17:00:00 GMT-0500 (EST)",
+            "endTime": "Sat Apr 14 2018 18:00:00 GMT-0500 (EST)",
+            "location": "kitchen"
+          },
+          {
+            "activity": "entertainment",
+            "startTime": "Sat Apr 14 2018 18:15:00 GMT-0500 (EST)",
+            "endTime": "Sat Apr 14 2018 20:30:00 GMT-0500 (EST)",
+            "location": "kitchen"
+          },
+          {
+            "activity": "sleeping",
+            "startTime": "Sat Apr 14 2018 21:00:00 GMT-0500 (EST)",
+            "endTime": "Sat Apr 14 2018 23:00:00 GMT-0500 (EST)",
+            "location": "bedroom"
+          }
+        ]
 
 def getActivityTimes(sensorDictList, locationDictList):
     activityTimes = []
@@ -131,7 +131,69 @@ def getAllLocationsAtDate(date):
                     locationDict['endTime'] = endTime[i]
                     locationList.append(locationDict)
             
-    return locationList
+    # return locationList
+    return [
+          {
+            "location": "bedroom",
+            "startTime": "Sat Apr 14 2018 00:00:00 GMT-0500 (EST)",
+            "endTime": "Sat Apr 14 2018 07:30:00 GMT-0500 (EST)",
+          },
+          {
+            "location": "bathroom",
+            "startTime": "Sat Apr 14 2018 07:40:00 GMT-0500 (EST)",
+            "endTime": "Sat Apr 14 2018 08:05:00 GMT-0500 (EST)",
+          },
+          {
+            "location": "kitchen",
+            "startTime": "Sat Apr 14 2018 08:15:00 GMT-0500 (EST)",
+            "endTime": "Sat Apr 14 2018 08:45:00 GMT-0500 (EST)",
+          },
+          {
+            "location": "living",
+            "startTime": "Sat Apr 14 2018 08:50:00 GMT-0500 (EST)",
+            "endTime": "Sat Apr 14 2018 09:15:00 GMT-0500 (EST)",
+          },
+          {
+            "location": "kitchen",
+            "startTime": "Sat Apr 14 2018 09:15:00 GMT-0500 (EST)",
+            "endTime": "Sat Apr 14 2018 10:30:00 GMT-0500 (EST)",
+          },
+          {
+            "location": "living",
+            "startTime": "Sat Apr 14 2018 10:35:00 GMT-0500 (EST)",
+            "endTime": "Sat Apr 14 2018 11:45:00 GMT-0500 (EST)",
+          },
+          {
+            "location": "bedroom",
+            "startTime": "Sat Apr 14 2018 11:50:00 GMT-0500 (EST)",
+            "endTime": "Sat Apr 14 2018 12:30:00 GMT-0500 (EST)",
+          },
+          {
+            "location": "living",
+            "startTime": "Sat Apr 14 2018 12:35:00 GMT-0500 (EST)",
+            "endTime": "Sat Apr 14 2018 13:00:00 GMT-0500 (EST)",
+          },
+          {
+            "location": "kitchen",
+            "startTime": "Sat Apr 14 2018 17:00:00 GMT-0500 (EST)",
+            "endTime": "Sat Apr 14 2018 18:00:00 GMT-0500 (EST)",
+          },
+          {
+            "location": "living",
+            "startTime": "Sat Apr 14 2018 18:15:00 GMT-0500 (EST)",
+            "endTime": "Sat Apr 14 2018 20:30:00 GMT-0500 (EST)",
+          },
+          {
+            "location": "bathroom",
+            "startTime": "Sat Apr 14 2018 20:35:00 GMT-0500 (EST)",
+            "endTime": "Sat Apr 14 2018 21:00:00 GMT-0500 (EST)",
+          },
+          {
+            "location": "bedroom",
+            "startTime": "Sat Apr 14 2018 21:00:00 GMT-0500 (EST)",
+            "endTime": "Sat Apr 14 2018 23:00:00 GMT-0500 (EST)",
+          }
+        ]
 
 def getAllDevicesAtDate(date):
     deviceList = []
@@ -199,40 +261,46 @@ def getAllDevicesAtDate(date):
     
     #print(deviceActivationList)
     #print(deviceDict.keys())
-    return deviceList
-	
-#	return [
-#		  {
-#		    "location": "kitchen",
-#		    "startTimeLocation": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
-#		    "endTimeLocation": "Fri Feb 07 2013 13:00:00 GMT-0500 (EST)"
-#		  },
-#		  {
-#		    "location": "kitchen",
-#		    "startTimeLocation": "Fri Feb 07 2013 11:00:00 GMT-0500 (EST)",
-#		    "endTimeLocation": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)"
-#		  },
-#		  {
-#		    "location": "living",
-#		    "startTimeLocation": "Fri Feb 07 2013 12:00:00 GMT-0500 (EST)",
-#		    "endTimeLocation": "Fri Feb 07 2013 13:00:00 GMT-0500 (EST)"
-#		  },
-#		  {
-#		    "location": "living",
-#		    "startTimeLocation": "Fri Feb 07 2013 14:00:00 GMT-0500 (EST)",
-#		    "endTimeLocation": "Fri Feb 07 2013 15:00:00 GMT-0500 (EST)"
-#		  },
-#		  {
-#		    "location": "kitchen",
-#		    "startTimeLocation": "Fri Feb 07 2013 15:00:00 GMT-0500 (EST)",
-#		    "endTimeLocation": "Fri Feb 07 2013 16:30:00 GMT-0500 (EST)"
-#		  },
-#		  {
-#		    "location": "living",
-#		    "startTimeLocation": "Fri Feb 07 2013 16:00:00 GMT-0500 (EST)",
-#		    "endTimeLocation": "Fri Feb 07 2013 17:00:00 GMT-0500 (EST)"
-#		  }
-#		]
+    # return deviceList
+	return [
+          {
+            "sensor": "stove",
+            "startTime": "Sat Apr 14 2018 08:15:00 GMT-0500 (EST)",
+            "endTime": "Sat Apr 14 2018 09:15:00 GMT-0500 (EST)",
+            "location": "kitchen"
+          },
+          {
+            "sensor": "microwave",
+            "startTime": "Sat Apr 14 2018 09:15:00 GMT-0500 (EST)",
+            "endTime": "Sat Apr 14 2018 09:30:00 GMT-0500 (EST)",
+            "location": "kitchen"
+          },
+          {
+            "sensor": "stove",
+            "startTime": "Sat Apr 14 2018 09:45:00 GMT-0500 (EST)",
+            "endTime": "Sat Apr 14 2018 10:15:00 GMT-0500 (EST)",
+            "location": "kitchen"
+          },
+          {
+            "sensor": "TV",
+            "startTime": "Sat Apr 14 2018 10:35:00 GMT-0500 (EST)",
+            "endTime": "Sat Apr 14 2018 13:00:00 GMT-0500 (EST)",
+            "location": "living"
+          },
+          {
+            "sensor": "stove",
+            "startTime": "Sat Apr 14 2018 17:00:00 GMT-0500 (EST)",
+            "endTime": "Sat Apr 14 2018 18:00:00 GMT-0500 (EST)",
+            "location": "kitchen"
+          },
+          {
+            "sensor": "XBox",
+            "startTime": "Sat Apr 14 2018 18:15:00 GMT-0500 (EST)",
+            "endTime": "Sat Apr 14 2018 20:30:00 GMT-0500 (EST)",
+            "location": "kitchen"
+          }
+        ]
+
 #
 #
 #def getAllDevicesAtDate(date):
