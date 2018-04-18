@@ -287,9 +287,15 @@ def getAllDevicesAtDate(date):
             "sensor": "XBox",
             "startTime": "Sat Apr 14 2018 18:15:00 GMT-0500 (EST)",
             "endTime": "Sat Apr 14 2018 20:30:00 GMT-0500 (EST)",
-            "location": "kitchen"
+            "location": "living"
           }
         ]
+
+def getDevicesAtAllLocations():
+	return {
+		'kitchen': ['stove', 'microwave'],
+		'living': ['TV', 'XBox']
+	}
 
 #
 #

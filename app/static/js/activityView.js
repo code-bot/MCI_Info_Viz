@@ -24,7 +24,7 @@ render('ascending');
 timeScale = d3.scaleTime()
         .domain([d3.min(taskArray, function(d) {return new Date(d.startTime);}),
                  d3.max(taskArray, function(d) {return new Date(d.endTime);})])
-        .range([0,w-200]);
+        .range([0,w-225]);
 
 
 var categories = d3.map(taskArray, function(d){return d.location;}).keys();
@@ -33,6 +33,7 @@ for (var i = 0; i < categories.length; i++) {
   category = categories[i];
   locations[category] = i;
 }
+
 
 makeGant(taskArray, locations, categories, w, h);
 
@@ -151,7 +152,8 @@ function drawBars(tasks, locations, horiPad, sectionHeight, barHeight, width, he
   bars.on('mouseover', function(e) {
 
     var tag = "";
-    tag = "Location: " + d3.select(this).data()[0].location + "<br/>" + 
+    tag = "Activity: " + d3.select(this).data()[0].activity + "<br/>" +
+        "Location: " + d3.select(this).data()[0].location + "<br/>" + 
         "Starts: " + d3.select(this).data()[0].startTime + "<br/>" + 
         "Ends: " + d3.select(this).data()[0].endTime;
     var output = document.getElementById("tag");

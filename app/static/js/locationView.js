@@ -24,7 +24,7 @@ render('ascending');
 timeScale = d3.scaleTime()
         .domain([d3.min(taskArray, function(d) {return new Date(d.startTime);}),
                  d3.max(taskArray, function(d) {return new Date(d.endTime);})])
-        .range([0,w-200]);
+        .range([0,w-225]);
 
 
 var categories = d3.map(taskArray, function(d){return d.location;}).keys();

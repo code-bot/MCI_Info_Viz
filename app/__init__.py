@@ -24,6 +24,7 @@ def viz():
 		date = datetime.strptime(dateStr, '%a, %B %d %Y')
 	else:
 		date = datetime.today()
+		dateStr = date.strftime('%a, %B %d %Y')
 
 	if viewType == 'location':
 		title = "Patient's Location"
@@ -38,9 +39,10 @@ def viz():
 		vizFile = 'sensorView.js'
 		vizData_sensors = database.getAllDevicesAtDate(date)
 		vizData_location = database.getAllLocationsAtDate(date)
+		vizData_sensors_locations = database.getDevicesAtAllLocations()
 
 		
-		vizData = [vizData_sensors, vizData_location]
+		vizData = [vizData_location, vizData_sensors, vizData_sensors_locations]
 	else:
 		return redirect('/viz')
 
