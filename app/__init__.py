@@ -9,6 +9,8 @@ app.config.from_object('config.Config') # load config
 
 @app.route('/')
 def activity():
+
+	# # Sample SQL Server Query
     
     return render_template('home.html')
 
