@@ -1,13 +1,11 @@
 
-    * {
-      margin: 0;
-      padding: 0;
-  }
-  body {
-      background: #fff;
-      font-family: 'Open-Sans',sans-serif;
-
-  }
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Open-Sans',sans-serif;
+}
 
 #container{
   margin: 0 auto;
@@ -16,16 +14,37 @@
   overflow: visible;
 }
 
+.bar {
+  rx: 3;
+  ry: 3;
+}
 
-  .svg {
-    width:800px;
-    height:400px;
+.viz-row {
+  
+  border-radius: 3px;
+  box-shadow: 2px 2px 7px #888888;
+  min-height:500px;
+}
+
+.viz-options {
+  padding:20px;
+}
+
+.viz-column {
+  padding:0px !important;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  background: #FFF;
+}
+
+.svg {
+  background: transparent;
     overflow: visible;
     position:absolute;
 }
 
 .grid .tick {
-    stroke: lightgrey;
+    stroke: lightgray;
     opacity: 0.3;
     shape-rendering: crispEdges;
 }
@@ -33,6 +52,26 @@
       stroke-width: 0;
 }
 
+.centered {
+  text-align: center;
+
+}
+
+.spacer {
+  padding: 20px;
+}
+
+.xs-spacer {
+  padding: 5px;
+}
+
+.small-spacer {
+  padding: 10px;
+}
+
+.large-spacer {
+  padding: 50px;
+}
 
 #tag {
   color: white;

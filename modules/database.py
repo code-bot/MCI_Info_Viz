@@ -34,7 +34,7 @@ def closeConnection():
 			_conn = None
 
 def getAllActivities():
-return [
+	return [
           {
             "activity": "sleeping",
             "startTime": "Sat Apr 14 2018 00:00:00 GMT-0500 (EST)",
@@ -91,45 +91,45 @@ def getActivityTimes(sensorDictList, locationDictList):
     return activityTimes
 
 def getAllLocationsAtDate(date):
-    locationList = []
-    tagID = 56080 #tag 16
-    command = """SELECT ID, RoomName FROM Rooms"""
-    rooms = getCursor().execute(command).fetchall()
-    for room in rooms:        
-        index = 0
-        startTime = [None]
-        endTime = [None]
-        time = None
+    # locationList = []
+    # tagID = 56080 #tag 16
+    # command = """SELECT ID, RoomName FROM Rooms"""
+    # rooms = getCursor().execute(command).fetchall()
+    # for room in rooms:        
+    #     index = 0
+    #     startTime = [None]
+    #     endTime = [None]
+    #     time = None
         
-        transmissions = getLocationAtDate(tagID,date)
+    #     transmissions = getLocationAtDate(tagID,date)
         
-        for j in range(1,len(transmissions)):
-            transmission = transmissions[j]
-            time = transmission[1]
-            currRoom = transmission[0]
-            prevRoom = transmissions[j-1][0]
-            if currRoom == room[0] and not startTime[index]:
-                startTime[index] = time
-                startTime.append(None)
-                #print(startTime[index])
-            elif currRoom != prevRoom and not endTime[index] and startTime[index]:
-                endTime[index] = time
-                #print(endTime[index])
-                endTime.append(None)
-                index +=1
+    #     for j in range(1,len(transmissions)):
+    #         transmission = transmissions[j]
+    #         time = transmission[1]
+    #         currRoom = transmission[0]
+    #         prevRoom = transmissions[j-1][0]
+    #         if currRoom == room[0] and not startTime[index]:
+    #             startTime[index] = time
+    #             startTime.append(None)
+    #             #print(startTime[index])
+    #         elif currRoom != prevRoom and not endTime[index] and startTime[index]:
+    #             endTime[index] = time
+    #             #print(endTime[index])
+    #             endTime.append(None)
+    #             index +=1
             
-        if startTime[index] and not endTime[index]:
-            endTime[index] = time
-            index += 1
+    #     if startTime[index] and not endTime[index]:
+    #         endTime[index] = time
+    #         index += 1
         
-        for i in range(index):
-            #print(endTime[i]-startTime[i])
-            locationDict = {}
-            if (endTime[i]-startTime[i])>datetime.timedelta(minutes=1):
-                    locationDict['location'] = room[1]
-                    locationDict['startTime'] = startTime[i]
-                    locationDict['endTime'] = endTime[i]
-                    locationList.append(locationDict)
+    #     for i in range(index):
+    #         #print(endTime[i]-startTime[i])
+    #         locationDict = {}
+    #         if (endTime[i]-startTime[i])>datetime.timedelta(minutes=1):
+    #             locationDict['location'] = room[1]
+    #             locationDict['startTime'] = startTime[i].strftime('%Y-%m-%d %H:%M:%S')
+    #             locationDict['endTime'] = endTime[i].strftime('%Y-%m-%d %H:%M:%S')
+    #             locationList.append(locationDict)
             
     # return locationList
     return [
@@ -196,67 +196,64 @@ def getAllLocationsAtDate(date):
         ]
 
 def getAllDevicesAtDate(date):
-    deviceList = []
-    command = """SELECT DeviceID, DevicePlugNumber, WhatsPluggedIn, SensorID FROM DeviceSensors WHERE RecordStatus='A'"""
-    devices = getCursor().execute(command).fetchall()
-    #map deviceID+plug to device name (later users can input name into database)
-    deviceMap = {}
-    deviceMap[43536] = {3:'TV',5:'Xbox360'}
-    deviceMap[43578] = {4:'Stove'}
-    deviceMap[49943] = {4:'Toilet'}
-    #deviceActivationList = []
-    #print(date)
-    #print(datetime.datetime.today())
-    deviceDict = {}
-    threshold = 20; #set watts threshold so you don't pick up weird stuff
-    for device in devices:
-        deviceID = device[0]
-        devicePlugNumber = device[1]
-        #if device is in device map assign proper label
-        if deviceID in deviceMap.keys():
-            if devicePlugNumber in deviceMap[deviceID].keys():
-                label = deviceMap[deviceID][devicePlugNumber]
-            else:
-                continue
-        else:
-            continue
-        #print(label)
-        transmissions = getDeviceAtDate(deviceID, date)
+#     deviceList = []
+#     command = """SELECT DeviceID, DevicePlugNumber, WhatsPluggedIn, SensorID FROM DeviceSensors WHERE RecordStatus='A'"""
+#     devices = getCursor().execute(command).fetchall()
+#     #map deviceID+plug to device name (later users can input name into database)
+#     deviceMap = {}
+#     deviceMap[43536] = {3:'TV',5:'Xbox360'}
+#     deviceMap[43578] = {4:'Stove'}
+#     deviceMap[49943] = {4:'Toilet'}
+#     deviceDict = {}
+#     threshold = 20; #set watts threshold so you don't pick up weird stuff
+#     for device in devices:
+#         deviceID = device[0]
+#         devicePlugNumber = device[1]
+#         #if device is in device map assign proper label
+#         if deviceID in deviceMap.keys():
+#             if devicePlugNumber in deviceMap[deviceID].keys():
+#                 label = deviceMap[deviceID][devicePlugNumber]
+#             else:
+#                 label = device[2]
+#         else:
+#             label = device[2]
+#         #print(label)
+#         transmissions = getDeviceAtDate(deviceID, date)
         
-        index = 0
-        startTime = [None]
-        endTime = [None]
-        time = None
-        for j in range(1,len(transmissions)):
-            transmission = transmissions[j]
-            watts = transmission[devicePlugNumber]
-            prevWatts = transmissions[j-1][devicePlugNumber]
-#            if deviceID == 43536 and devicePlugNumber == 3:
-                #print(watts - prevWatts)
-            time = transmission[6]
-            if (watts - prevWatts) > threshold and not startTime[index]:
-                startTime[index] = time
-                #print(startTime[index])
-                startTime.append(None)
-            elif (watts - prevWatts) < -threshold and not endTime[index] and startTime[index]:
-                endTime[index] = time
-                #print(endTime[index])
-                endTime.append(None)
-                index += 1
+#         index = 0
+#         startTime = [None]
+#         endTime = [None]
+#         time = None
+#         for j in range(1,len(transmissions)):
+#             transmission = transmissions[j]
+#             watts = transmission[devicePlugNumber]
+#             prevWatts = transmissions[j-1][devicePlugNumber]
+# #            if deviceID == 43536 and devicePlugNumber == 3:
+#                 #print(watts - prevWatts)
+#             time = transmission[6]
+#             if (watts - prevWatts) > threshold and not startTime[index]:
+#                 startTime[index] = time
+#                 #print(startTime[index])
+#                 startTime.append(None)
+#             elif (watts - prevWatts) < -threshold and not endTime[index] and startTime[index]:
+#                 endTime[index] = time
+#                 #print(endTime[index])
+#                 endTime.append(None)
+#                 index += 1
         
-        if startTime[index] and not endTime[index]:
-            endTime[index] = time
-            index += 1
+#         if startTime[index] and not endTime[index]:
+#             endTime[index] = time
+#             index += 1
         
         
-        for i in range(index):
-            #print(endTime[i]-startTime[i])
-            deviceDict = {}
-            if (endTime[i]-startTime[i])>datetime.timedelta(minutes=4):
-                deviceDict['device'] = label
-                deviceDict['startTime'] = startTime[i]
-                deviceDict['endTime'] = endTime[i]
-                deviceList.append(deviceDict)
+#         for i in range(index):
+#             #print(endTime[i]-startTime[i])
+#             deviceDict = {}
+#             if (endTime[i]-startTime[i])>datetime.timedelta(minutes=4):
+#                 deviceDict['device'] = label
+#                 deviceDict['startTimeSensor'] = startTime[i].strftime('%Y-%m-%d %H:%M:%S')
+#                 deviceDict['endTimeSensor'] = endTime[i].strftime('%Y-%m-%d %H:%M:%S')
+#                 deviceList.append(deviceDict)
             #deviceActivationList.append([label, startTime[i], endTime[i]])
     
     #print(deviceActivationList)
@@ -297,9 +294,15 @@ def getAllDevicesAtDate(date):
             "sensor": "XBox",
             "startTime": "Sat Apr 14 2018 18:15:00 GMT-0500 (EST)",
             "endTime": "Sat Apr 14 2018 20:30:00 GMT-0500 (EST)",
-            "location": "kitchen"
+            "location": "living"
           }
         ]
+
+def getDevicesAtAllLocations():
+	return {
+		'kitchen': ['stove', 'microwave'],
+		'living': ['TV', 'XBox']
+	}
 
 #
 #

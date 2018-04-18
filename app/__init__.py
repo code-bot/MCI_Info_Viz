@@ -11,13 +11,6 @@ app.config.from_object('config.Config') # load config
 def activity():
 
 	# # Sample SQL Server Query
-	# cursor = database.getCursor()
-	# rooms = cursor.execute("SELECT * FROM Rooms").fetchall();
-	# print(rooms)
-	# database.closeConnection()
-	#database.getAllDevicesAtDate(datetime.today())
-    sensorDictList = database.getAllDevicesAtDate(datetime.datetime(2018,4,14,hour=16,minute=30,second=0,microsecond=0))
-    locDictList = database.getAllLocationsAtDate(datetime.datetime(2018,4,14,hour=16,minute=30,second=0,microsecond=0))
     
     return render_template('home.html')
 
@@ -30,9 +23,10 @@ def viz():
 	dateStr = request.args.get('date', None)
 
 	if dateStr and dateStr != "None":
-		date = datetime.strptime(dateStr, '%Y-%m-%d')
+		date = datetime.strptime(dateStr, '%a, %B %d %Y')
 	else:
 		date = datetime.today()
+		dateStr = date.strftime('%a, %B %d %Y')
 
 	if viewType == 'location':
 		title = "Patient's Location"
@@ -47,7 +41,10 @@ def viz():
 		vizFile = 'sensorView.js'
 		vizData_sensors = database.getAllDevicesAtDate(date)
 		vizData_location = database.getAllLocationsAtDate(date)
-		vizData = [vizData_sensors, vizData_location]
+		vizData_sensors_locations = database.getDevicesAtAllLocations()
+
+		
+		vizData = [vizData_location, vizData_sensors, vizData_sensors_locations]
 	else:
 		return redirect('/viz')
 
