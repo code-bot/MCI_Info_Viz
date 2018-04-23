@@ -10,7 +10,6 @@ app.config.from_object('config.Config') # load config
 @app.route('/')
 def activity():
 
-	# # Sample SQL Server Query
     
     return render_template('home.html')
 
@@ -43,7 +42,8 @@ def viz():
 		vizData_location = database.getAllLocationsAtDate(date)
 		vizData_sensors_locations = database.getDevicesAtAllLocations()
 
-		
+
+		#vizData = database.getAllActivities(['stove'],['kitchen'],['cooking'],vizData_sensors,vizData_location)
 		vizData = [vizData_location, vizData_sensors, vizData_sensors_locations]
 	else:
 		return redirect('/viz')

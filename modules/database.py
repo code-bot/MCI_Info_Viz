@@ -33,45 +33,71 @@ def closeConnection():
 		except:
 			_conn = None
 
-def getAllActivities():
-	return [
-          {
-            "activity": "sleeping",
-            "startTime": "Sat Apr 14 2018 00:00:00 GMT-0500 (EST)",
-            "endTime": "Sat Apr 14 2018 07:30:00 GMT-0500 (EST)",
-            "location": "bedroom"
-          },
-          {
-            "activity": "cooking",
-            "startTime": "Sat Apr 14 2018 08:15:00 GMT-0500 (EST)",
-            "endTime": "Sat Apr 14 2018 10:30:00 GMT-0500 (EST)",
-            "location": "kitchen"
-          },
-          {
-            "activity": "entertainment",
-            "startTime": "Sat Apr 14 2018 10:35:00 GMT-0500 (EST)",
-            "endTime": "Sat Apr 14 2018 13:00:00 GMT-0500 (EST)",
-            "location": "living"
-          },
-          {
-            "activity": "cooking",
-            "startTime": "Sat Apr 14 2018 17:00:00 GMT-0500 (EST)",
-            "endTime": "Sat Apr 14 2018 18:00:00 GMT-0500 (EST)",
-            "location": "kitchen"
-          },
-          {
-            "activity": "entertainment",
-            "startTime": "Sat Apr 14 2018 18:15:00 GMT-0500 (EST)",
-            "endTime": "Sat Apr 14 2018 20:30:00 GMT-0500 (EST)",
-            "location": "kitchen"
-          },
-          {
-            "activity": "sleeping",
-            "startTime": "Sat Apr 14 2018 21:00:00 GMT-0500 (EST)",
-            "endTime": "Sat Apr 14 2018 23:00:00 GMT-0500 (EST)",
-            "location": "bedroom"
-          }
-        ]
+def getAllActivities(sensors,locations,activities,sensorDictList,locDictList):
+    activityDictList = []
+    #get the specified sensor and location data for an activity
+    index = 0
+    for activity in activities:
+        print(sensors)
+        sensor = sensors[index]
+        location = locations[index]
+        newSensorList = []
+        newLocList = []
+        for sensorDict in sensorDictList:
+            if sensor == sensorDict['sensor']:
+                newSensorList.append(sensorDict)
+        for locDict in locDictList:
+            if location == locDict['location']:
+                newLocList.append(locDict)
+        #get start and end times
+        times = getActivityTimes(newSensorList,newLocList)
+        for time in times:
+            actDict = {}
+            actDict['activity'] = activity
+            actDict['startTime'] = time[0]
+            actDict['endTime'] = time[1]
+            actDict['location'] = location
+            activityDictList.append(actDict)
+        index += 1
+    print(activityDictList)
+    return activityDictList
+#          {
+#            "activity": "sleeping",
+#            "startTime": "Sat Apr 14 2018 00:00:00 GMT-0500 (EST)",
+#            "endTime": "Sat Apr 14 2018 07:30:00 GMT-0500 (EST)",
+#            "location": "bedroom"
+#          },
+#          {
+#            "activity": "cooking",
+#            "startTime": "Sat Apr 14 2018 08:15:00 GMT-0500 (EST)",
+#            "endTime": "Sat Apr 14 2018 10:30:00 GMT-0500 (EST)",
+#            "location": "kitchen"
+#          },
+#          {
+#            "activity": "entertainment",
+#            "startTime": "Sat Apr 14 2018 10:35:00 GMT-0500 (EST)",
+#            "endTime": "Sat Apr 14 2018 13:00:00 GMT-0500 (EST)",
+#            "location": "living"
+#          },
+#          {
+#            "activity": "cooking",
+#            "startTime": "Sat Apr 14 2018 17:00:00 GMT-0500 (EST)",
+#            "endTime": "Sat Apr 14 2018 18:00:00 GMT-0500 (EST)",
+#            "location": "kitchen"
+#          },
+#          {
+#            "activity": "entertainment",
+#            "startTime": "Sat Apr 14 2018 18:15:00 GMT-0500 (EST)",
+#            "endTime": "Sat Apr 14 2018 20:30:00 GMT-0500 (EST)",
+#            "location": "kitchen"
+#          },
+#          {
+#            "activity": "sleeping",
+#            "startTime": "Sat Apr 14 2018 21:00:00 GMT-0500 (EST)",
+#            "endTime": "Sat Apr 14 2018 23:00:00 GMT-0500 (EST)",
+#            "location": "bedroom"
+#          }
+#        ]
 
 def getActivityTimes(sensorDictList, locationDictList):
     activityTimes = []
@@ -201,9 +227,9 @@ def getAllDevicesAtDate(date):
 #     devices = getCursor().execute(command).fetchall()
 #     #map deviceID+plug to device name (later users can input name into database)
 #     deviceMap = {}
-#     deviceMap[43536] = {3:'TV',5:'Xbox360'}
-#     deviceMap[43578] = {4:'Stove'}
-#     deviceMap[49943] = {4:'Toilet'}
+#     deviceMap[43536] = {3:'TV',5:'Xbox'}
+#     deviceMap[43578] = {4:'stove'}
+#     deviceMap[49943] = {4:'toilet'}
 #     deviceDict = {}
 #     threshold = 20; #set watts threshold so you don't pick up weird stuff
 #     for device in devices:
@@ -250,9 +276,9 @@ def getAllDevicesAtDate(date):
 #             #print(endTime[i]-startTime[i])
 #             deviceDict = {}
 #             if (endTime[i]-startTime[i])>datetime.timedelta(minutes=4):
-#                 deviceDict['device'] = label
-#                 deviceDict['startTimeSensor'] = startTime[i].strftime('%Y-%m-%d %H:%M:%S')
-#                 deviceDict['endTimeSensor'] = endTime[i].strftime('%Y-%m-%d %H:%M:%S')
+#                 deviceDict['sensor'] = label
+#                 deviceDict['startTime'] = startTime[i].strftime('%Y-%m-%d %H:%M:%S')
+#                 deviceDict['endTime'] = endTime[i].strftime('%Y-%m-%d %H:%M:%S')
 #                 deviceList.append(deviceDict)
             #deviceActivationList.append([label, startTime[i], endTime[i]])
     
@@ -300,8 +326,9 @@ def getAllDevicesAtDate(date):
 
 def getDevicesAtAllLocations():
 	return {
-		'kitchen': ['stove', 'microwave'],
-		'living': ['TV', 'XBox']
+		'kitchen': ['stove'],
+		'living': ['TV', 'XBox'],
+		'bathroom': ['toilet']
 	}
 
 #
