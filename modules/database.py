@@ -33,6 +33,7 @@ def closeConnection():
 		except:
 			_conn = None
 
+
 def getAllActivities(sensors,locations,activities,sensorDictList,locDictList):
     activityDictList = []
     #get the specified sensor and location data for an activity
@@ -99,6 +100,47 @@ def getAllActivities(sensors,locations,activities,sensorDictList,locDictList):
 #          }
 #        ]
 
+#def getAllActivities():
+#	return [
+#		  {
+#			"activity": "sleeping",
+#			"startTime": "Sat Apr 14 2018 00:00:00 GMT-0500 (EST)",
+#			"endTime": "Sat Apr 14 2018 07:30:00 GMT-0500 (EST)",
+#			"location": "bedroom"
+#		  },
+#		  {
+#			"activity": "cooking",
+#			"startTime": "Sat Apr 14 2018 08:15:00 GMT-0500 (EST)",
+#			"endTime": "Sat Apr 14 2018 10:30:00 GMT-0500 (EST)",
+#			"location": "kitchen"
+#		  },
+#		  {
+#			"activity": "entertainment",
+#			"startTime": "Sat Apr 14 2018 10:35:00 GMT-0500 (EST)",
+#			"endTime": "Sat Apr 14 2018 13:00:00 GMT-0500 (EST)",
+#			"location": "living"
+#		  },
+#		  {
+#			"activity": "cooking",
+#			"startTime": "Sat Apr 14 2018 17:00:00 GMT-0500 (EST)",
+#			"endTime": "Sat Apr 14 2018 18:00:00 GMT-0500 (EST)",
+#			"location": "kitchen"
+#		  },
+#		  {
+#			"activity": "entertainment",
+#			"startTime": "Sat Apr 14 2018 18:15:00 GMT-0500 (EST)",
+#			"endTime": "Sat Apr 14 2018 20:30:00 GMT-0500 (EST)",
+#			"location": "kitchen"
+#		  },
+#		  {
+#			"activity": "sleeping",
+#			"startTime": "Sat Apr 14 2018 21:00:00 GMT-0500 (EST)",
+#			"endTime": "Sat Apr 14 2018 23:00:00 GMT-0500 (EST)",
+#			"location": "bedroom"
+#		  }
+#		]
+
+
 def getActivityTimes(sensorDictList, locationDictList):
     activityTimes = []
     for sensorDict in sensorDictList:
@@ -117,218 +159,232 @@ def getActivityTimes(sensorDictList, locationDictList):
     return activityTimes
 
 def getAllLocationsAtDate(date):
-    # locationList = []
-    # tagID = 56080 #tag 16
-    # command = """SELECT ID, RoomName FROM Rooms"""
-    # rooms = getCursor().execute(command).fetchall()
-    # for room in rooms:        
-    #     index = 0
-    #     startTime = [None]
-    #     endTime = [None]
-    #     time = None
-        
-    #     transmissions = getLocationAtDate(tagID,date)
-        
-    #     for j in range(1,len(transmissions)):
-    #         transmission = transmissions[j]
-    #         time = transmission[1]
-    #         currRoom = transmission[0]
-    #         prevRoom = transmissions[j-1][0]
-    #         if currRoom == room[0] and not startTime[index]:
-    #             startTime[index] = time
-    #             startTime.append(None)
-    #             #print(startTime[index])
-    #         elif currRoom != prevRoom and not endTime[index] and startTime[index]:
-    #             endTime[index] = time
-    #             #print(endTime[index])
-    #             endTime.append(None)
-    #             index +=1
-            
-    #     if startTime[index] and not endTime[index]:
-    #         endTime[index] = time
-    #         index += 1
-        
-    #     for i in range(index):
-    #         #print(endTime[i]-startTime[i])
-    #         locationDict = {}
-    #         if (endTime[i]-startTime[i])>datetime.timedelta(minutes=1):
-    #             locationDict['location'] = room[1]
-    #             locationDict['startTime'] = startTime[i].strftime('%Y-%m-%d %H:%M:%S')
-    #             locationDict['endTime'] = endTime[i].strftime('%Y-%m-%d %H:%M:%S')
-    #             locationList.append(locationDict)
-            
-    # return locationList
-    return [
-          {
-            "location": "bedroom",
-            "startTime": "Sat Apr 14 2018 00:00:00 GMT-0500 (EST)",
-            "endTime": "Sat Apr 14 2018 07:30:00 GMT-0500 (EST)",
-          },
-          {
-            "location": "bathroom",
-            "startTime": "Sat Apr 14 2018 07:40:00 GMT-0500 (EST)",
-            "endTime": "Sat Apr 14 2018 08:05:00 GMT-0500 (EST)",
-          },
-          {
-            "location": "kitchen",
-            "startTime": "Sat Apr 14 2018 08:15:00 GMT-0500 (EST)",
-            "endTime": "Sat Apr 14 2018 08:45:00 GMT-0500 (EST)",
-          },
-          {
-            "location": "living",
-            "startTime": "Sat Apr 14 2018 08:50:00 GMT-0500 (EST)",
-            "endTime": "Sat Apr 14 2018 09:15:00 GMT-0500 (EST)",
-          },
-          {
-            "location": "kitchen",
-            "startTime": "Sat Apr 14 2018 09:15:00 GMT-0500 (EST)",
-            "endTime": "Sat Apr 14 2018 10:30:00 GMT-0500 (EST)",
-          },
-          {
-            "location": "living",
-            "startTime": "Sat Apr 14 2018 10:35:00 GMT-0500 (EST)",
-            "endTime": "Sat Apr 14 2018 11:45:00 GMT-0500 (EST)",
-          },
-          {
-            "location": "bedroom",
-            "startTime": "Sat Apr 14 2018 11:50:00 GMT-0500 (EST)",
-            "endTime": "Sat Apr 14 2018 12:30:00 GMT-0500 (EST)",
-          },
-          {
-            "location": "living",
-            "startTime": "Sat Apr 14 2018 12:35:00 GMT-0500 (EST)",
-            "endTime": "Sat Apr 14 2018 13:00:00 GMT-0500 (EST)",
-          },
-          {
-            "location": "kitchen",
-            "startTime": "Sat Apr 14 2018 17:00:00 GMT-0500 (EST)",
-            "endTime": "Sat Apr 14 2018 18:00:00 GMT-0500 (EST)",
-          },
-          {
-            "location": "living",
-            "startTime": "Sat Apr 14 2018 18:15:00 GMT-0500 (EST)",
-            "endTime": "Sat Apr 14 2018 20:30:00 GMT-0500 (EST)",
-          },
-          {
-            "location": "bathroom",
-            "startTime": "Sat Apr 14 2018 20:35:00 GMT-0500 (EST)",
-            "endTime": "Sat Apr 14 2018 21:00:00 GMT-0500 (EST)",
-          },
-          {
-            "location": "bedroom",
-            "startTime": "Sat Apr 14 2018 21:00:00 GMT-0500 (EST)",
-            "endTime": "Sat Apr 14 2018 23:00:00 GMT-0500 (EST)",
-          }
-        ]
+	locationList = []
+	tagID = 56080 #tag 16
+	command = """SELECT ID, RoomName FROM Rooms"""
+	rooms = getCursor().execute(command).fetchall()
+	for room in rooms:        
+		index = 0
+		startTime = [None]
+		endTime = [None]
+		time = None
+		
+		transmissions = getLocationAtDate(tagID,date)
+		
+		for j in range(1,len(transmissions)):
+			transmission = transmissions[j]
+			time = transmission[1]
+			currRoom = transmission[0]
+			prevRoom = transmissions[j-1][0]
+			if currRoom == room[0] and not startTime[index]:
+				startTime[index] = time
+				startTime.append(None)
+				#print(startTime[index])
+			elif currRoom != prevRoom and not endTime[index] and startTime[index]:
+				endTime[index] = time
+				#print(endTime[index])
+				endTime.append(None)
+				index +=1
+			
+		if startTime[index] and not endTime[index]:
+			endTime[index] = time
+			index += 1
+		
+		for i in range(index):
+			#print(endTime[i]-startTime[i])
+			locationDict = {}
+			if (endTime[i]-startTime[i])>datetime.timedelta(minutes=1):
+				locationDict['location'] = room[1]
+				locationDict['startTime'] = startTime[i].strftime('%Y-%m-%d %H:%M:%S')
+				locationDict['endTime'] = endTime[i].strftime('%Y-%m-%d %H:%M:%S')
+				locationList.append(locationDict)
+			
+	return locationList
+	return [
+		  {
+			"location": "bedroom",
+			"startTime": "Sat Apr 14 2018 00:00:00 GMT-0500 (EST)",
+			"endTime": "Sat Apr 14 2018 07:30:00 GMT-0500 (EST)",
+		  },
+		  {
+			"location": "bathroom",
+			"startTime": "Sat Apr 14 2018 07:40:00 GMT-0500 (EST)",
+			"endTime": "Sat Apr 14 2018 08:05:00 GMT-0500 (EST)",
+		  },
+		  {
+			"location": "kitchen",
+			"startTime": "Sat Apr 14 2018 08:15:00 GMT-0500 (EST)",
+			"endTime": "Sat Apr 14 2018 08:45:00 GMT-0500 (EST)",
+		  },
+		  {
+			"location": "living",
+			"startTime": "Sat Apr 14 2018 08:50:00 GMT-0500 (EST)",
+			"endTime": "Sat Apr 14 2018 09:15:00 GMT-0500 (EST)",
+		  },
+		  {
+			"location": "kitchen",
+			"startTime": "Sat Apr 14 2018 09:15:00 GMT-0500 (EST)",
+			"endTime": "Sat Apr 14 2018 10:30:00 GMT-0500 (EST)",
+		  },
+		  {
+			"location": "living",
+			"startTime": "Sat Apr 14 2018 10:35:00 GMT-0500 (EST)",
+			"endTime": "Sat Apr 14 2018 11:45:00 GMT-0500 (EST)",
+		  },
+		  {
+			"location": "bedroom",
+			"startTime": "Sat Apr 14 2018 11:50:00 GMT-0500 (EST)",
+			"endTime": "Sat Apr 14 2018 12:30:00 GMT-0500 (EST)",
+		  },
+		  {
+			"location": "living",
+			"startTime": "Sat Apr 14 2018 12:35:00 GMT-0500 (EST)",
+			"endTime": "Sat Apr 14 2018 13:00:00 GMT-0500 (EST)",
+		  },
+		  {
+			"location": "kitchen",
+			"startTime": "Sat Apr 14 2018 17:00:00 GMT-0500 (EST)",
+			"endTime": "Sat Apr 14 2018 18:00:00 GMT-0500 (EST)",
+		  },
+		  {
+			"location": "living",
+			"startTime": "Sat Apr 14 2018 18:15:00 GMT-0500 (EST)",
+			"endTime": "Sat Apr 14 2018 20:30:00 GMT-0500 (EST)",
+		  },
+		  {
+			"location": "bathroom",
+			"startTime": "Sat Apr 14 2018 20:35:00 GMT-0500 (EST)",
+			"endTime": "Sat Apr 14 2018 21:00:00 GMT-0500 (EST)",
+		  },
+		  {
+			"location": "bedroom",
+			"startTime": "Sat Apr 14 2018 21:00:00 GMT-0500 (EST)",
+			"endTime": "Sat Apr 14 2018 23:00:00 GMT-0500 (EST)",
+		  }
+		]
 
 def getAllDevicesAtDate(date):
-#     deviceList = []
-#     command = """SELECT DeviceID, DevicePlugNumber, WhatsPluggedIn, SensorID FROM DeviceSensors WHERE RecordStatus='A'"""
-#     devices = getCursor().execute(command).fetchall()
-#     #map deviceID+plug to device name (later users can input name into database)
-#     deviceMap = {}
-#     deviceMap[43536] = {3:'TV',5:'Xbox'}
-#     deviceMap[43578] = {4:'stove'}
-#     deviceMap[49943] = {4:'toilet'}
-#     deviceDict = {}
-#     threshold = 20; #set watts threshold so you don't pick up weird stuff
-#     for device in devices:
-#         deviceID = device[0]
-#         devicePlugNumber = device[1]
-#         #if device is in device map assign proper label
-#         if deviceID in deviceMap.keys():
-#             if devicePlugNumber in deviceMap[deviceID].keys():
-#                 label = deviceMap[deviceID][devicePlugNumber]
-#             else:
-#                 label = device[2]
-#         else:
-#             label = device[2]
-#         #print(label)
-#         transmissions = getDeviceAtDate(deviceID, date)
-        
-#         index = 0
-#         startTime = [None]
-#         endTime = [None]
-#         time = None
-#         for j in range(1,len(transmissions)):
-#             transmission = transmissions[j]
-#             watts = transmission[devicePlugNumber]
-#             prevWatts = transmissions[j-1][devicePlugNumber]
-# #            if deviceID == 43536 and devicePlugNumber == 3:
-#                 #print(watts - prevWatts)
-#             time = transmission[6]
-#             if (watts - prevWatts) > threshold and not startTime[index]:
-#                 startTime[index] = time
-#                 #print(startTime[index])
-#                 startTime.append(None)
-#             elif (watts - prevWatts) < -threshold and not endTime[index] and startTime[index]:
-#                 endTime[index] = time
-#                 #print(endTime[index])
-#                 endTime.append(None)
-#                 index += 1
-        
-#         if startTime[index] and not endTime[index]:
-#             endTime[index] = time
-#             index += 1
-        
-        
-#         for i in range(index):
-#             #print(endTime[i]-startTime[i])
-#             deviceDict = {}
-#             if (endTime[i]-startTime[i])>datetime.timedelta(minutes=4):
-#                 deviceDict['sensor'] = label
-#                 deviceDict['startTime'] = startTime[i].strftime('%Y-%m-%d %H:%M:%S')
-#                 deviceDict['endTime'] = endTime[i].strftime('%Y-%m-%d %H:%M:%S')
-#                 deviceList.append(deviceDict)
-            #deviceActivationList.append([label, startTime[i], endTime[i]])
-    
-    #print(deviceActivationList)
-    #print(deviceDict.keys())
-    # return deviceList
-	return [
-          {
-            "sensor": "stove",
-            "startTime": "Sat Apr 14 2018 08:15:00 GMT-0500 (EST)",
-            "endTime": "Sat Apr 14 2018 09:15:00 GMT-0500 (EST)",
-            "location": "kitchen"
-          },
-          {
-            "sensor": "microwave",
-            "startTime": "Sat Apr 14 2018 09:15:00 GMT-0500 (EST)",
-            "endTime": "Sat Apr 14 2018 09:30:00 GMT-0500 (EST)",
-            "location": "kitchen"
-          },
-          {
-            "sensor": "stove",
-            "startTime": "Sat Apr 14 2018 09:45:00 GMT-0500 (EST)",
-            "endTime": "Sat Apr 14 2018 10:15:00 GMT-0500 (EST)",
-            "location": "kitchen"
-          },
-          {
-            "sensor": "TV",
-            "startTime": "Sat Apr 14 2018 10:35:00 GMT-0500 (EST)",
-            "endTime": "Sat Apr 14 2018 13:00:00 GMT-0500 (EST)",
-            "location": "living"
-          },
-          {
-            "sensor": "stove",
-            "startTime": "Sat Apr 14 2018 17:00:00 GMT-0500 (EST)",
-            "endTime": "Sat Apr 14 2018 18:00:00 GMT-0500 (EST)",
-            "location": "kitchen"
-          },
-          {
-            "sensor": "XBox",
-            "startTime": "Sat Apr 14 2018 18:15:00 GMT-0500 (EST)",
-            "endTime": "Sat Apr 14 2018 20:30:00 GMT-0500 (EST)",
-            "location": "living"
-          }
-        ]
+
+	deviceList = []
+	command = """SELECT DeviceID, DevicePlugNumber, WhatsPluggedIn, SensorID FROM DeviceSensors WHERE RecordStatus='A' AND WhatsPluggedIn IN ('TV','X Box 360','Stove','Refrigerator','Float Switch')"""
+	devices = getCursor().execute(command).fetchall()
+	#map deviceID+plug to device name (later users can input name into database)
+	deviceMap = {}
+	deviceMap[43536] = {3:'TV',5:'X Box 360'}
+	deviceMap[43578] = {4:'Stove'}
+	deviceMap[49943] = {4:'Float Switch'}
+	deviceDict = {}
+	threshold = 20; #set watts threshold so you don't pick up weird stuff
+	locations = getLocationsOfDevices()
+	for device in devices:
+		deviceID = device[0]
+		devicePlugNumber = device[1]
+		#if device is in device map assign proper label
+		if deviceID in deviceMap.keys():
+			if devicePlugNumber in deviceMap[deviceID].keys():
+				label = deviceMap[deviceID][devicePlugNumber]
+			else:
+				label = device[2]
+		else:
+			label = device[2]
+		#print(label)
+		transmissions = getDeviceAtDate(deviceID, date)
+		
+		index = 0
+		startTime = [None]
+		endTime = [None]
+		time = None
+		for j in range(1,len(transmissions)):
+			transmission = transmissions[j]
+			watts = transmission[devicePlugNumber]
+			prevWatts = transmissions[j-1][devicePlugNumber]
+#            if deviceID == 43536 and devicePlugNumber == 3:
+				#print(watts - prevWatts)
+			time = transmission[6]
+			if (watts - prevWatts) > threshold and not startTime[index]:
+				startTime[index] = time
+				#print(startTime[index])
+				startTime.append(None)
+			elif (watts - prevWatts) < -threshold and not endTime[index] and startTime[index]:
+				endTime[index] = time
+				#print(endTime[index])
+				endTime.append(None)
+				index += 1
+		
+		if startTime[index] and not endTime[index]:
+			endTime[index] = time
+			index += 1
+		
+		
+		for i in range(index):
+			#print(endTime[i]-startTime[i])
+			deviceDict = {}
+			if (endTime[i]-startTime[i])>datetime.timedelta(minutes=4):
+				deviceDict['sensor'] = label.replace(' ','_')
+				deviceDict['startTime'] = startTime[i].strftime('%Y-%m-%d %H:%M:%S')
+				deviceDict['endTime'] = endTime[i].strftime('%Y-%m-%d %H:%M:%S')
+				deviceDict['location'] = locations.get(label)
+				deviceList.append(deviceDict)
+			#deviceActivationList.append([label, startTime[i], endTime[i]])
+	
+	# print(deviceActivationList)
+	# print(deviceDict.keys())
+	return deviceList
+#	return [
+#		  {
+#			"sensor": "stove",
+#			"startTime": "Sat Apr 14 2018 08:15:00 GMT-0500 (EST)",
+#			"endTime": "Sat Apr 14 2018 09:15:00 GMT-0500 (EST)",
+#			"location": "kitchen"
+#		  },
+#		  {
+#			"sensor": "microwave",
+#			"startTime": "Sat Apr 14 2018 09:15:00 GMT-0500 (EST)",
+#			"endTime": "Sat Apr 14 2018 09:30:00 GMT-0500 (EST)",
+#			"location": "kitchen"
+#		  },
+#		  {
+#			"sensor": "stove",
+#			"startTime": "Sat Apr 14 2018 09:45:00 GMT-0500 (EST)",
+#			"endTime": "Sat Apr 14 2018 10:15:00 GMT-0500 (EST)",
+#			"location": "kitchen"
+#		  },
+#		  {
+#			"sensor": "TV",
+#			"startTime": "Sat Apr 14 2018 10:35:00 GMT-0500 (EST)",
+#			"endTime": "Sat Apr 14 2018 13:00:00 GMT-0500 (EST)",
+#			"location": "living"
+#		  },
+#		  {
+#			"sensor": "stove",
+#			"startTime": "Sat Apr 14 2018 17:00:00 GMT-0500 (EST)",
+#			"endTime": "Sat Apr 14 2018 18:00:00 GMT-0500 (EST)",
+#			"location": "kitchen"
+#		  },
+#		  {
+#			"sensor": "XBox",
+#			"startTime": "Sat Apr 14 2018 18:15:00 GMT-0500 (EST)",
+#			"endTime": "Sat Apr 14 2018 20:30:00 GMT-0500 (EST)",
+#			"location": "living"
+#		  }
+#		]
+
+def getLocationsOfDevices():
+	return {
+		'Stove': 'The Kitchen',
+		'Refrigerator': 'The Kitchen',
+		'Wink Power Strip': 'The Kitchen',
+		'TV': 'The Livingroom',
+		'X Box 360': 'The Livingroom',
+		'Float Switch': 'Bathroom One'
+	}
 
 def getDevicesAtAllLocations():
+
 	return {
-		'kitchen': ['stove'],
-		'living': ['TV', 'XBox'],
-		'bathroom': ['toilet']
+		'The Kitchen': ['Stove', 'Refrigerator', 'Wink Power Strip'],
+		'The Livingroom': ['TV', 'X_Box_360'],
+		'Bathroom One': ['Float_Switch']
 	}
 
 #
@@ -424,9 +480,9 @@ def getDeviceAtDate(deviceID, date):
 	return transmissions
 
 def getLocationAtDate(locationID, date):
-    date = date.strftime('%Y-%m-%d')
-    command = """SELECT RoomID, EndOfMinuteInterval FROM tbl_PTagCalculatedLocation
-              WHERE Convert(date, EndOfMinuteInterval)=Convert(date, '{}') AND PTagID={}
-              ORDER BY EndOfMinuteInterval ASC""".format(date,locationID)
-    transmissions = getCursor().execute(command).fetchall()
-    return transmissions
+	date = date.strftime('%Y-%m-%d')
+	command = """SELECT RoomID, EndOfMinuteInterval FROM tbl_PTagCalculatedLocation
+			  WHERE Convert(date, EndOfMinuteInterval)=Convert(date, '{}') AND PTagID={}
+			  ORDER BY EndOfMinuteInterval ASC""".format(date,locationID)
+	transmissions = getCursor().execute(command).fetchall()
+	return transmissions

@@ -15,6 +15,7 @@ var svg = d3.select('svg');
 var taskArray = appConfig.dataset[0];
 var taskArray2 = appConfig.dataset[1];
 var extra = appConfig.dataset[2];
+console.log(taskArray2)
 
 function render(d3Comparator) {
     if(d3Comparator) taskArray = taskArray.sort(function(a, b) {
@@ -56,14 +57,15 @@ function makeGant(tasks, tasks2, locations, categories, categories2, width, heig
 
   makeGrid(horiPad, vertPad, width, height);
   console.log(tasks)
+  console.log(tasks2)
   console.log(locations)
   console.log(categories)
+  console.log(categories2)
   drawSections(categories, vertPad, sectionHeight, width, height);
   //drawSectionLabels(categories, sectionHeight, colorScale);
   drawBars(tasks, locations, categories, horiPad, sectionHeight, barHeight, width, height, "locationBar", "gray", 0);
   for (var i = 0; i < categories2.length; i++) {
     category = categories2[i]
-    console.log(category);
     tempTasks = [];
     for (var j = 0; j < tasks2.length; j++) {
       task = tasks2[j];
