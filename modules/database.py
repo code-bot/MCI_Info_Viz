@@ -60,7 +60,7 @@ def getAllActivities(sensors,locations,activities,sensorDictList,locDictList):
             actDict['location'] = location
             activityDictList.append(actDict)
         index += 1
-    print(activityDictList)
+    #print(activityDictList)
     return activityDictList
 #          {
 #            "activity": "sleeping",
