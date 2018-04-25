@@ -40,13 +40,14 @@ def getAllActivities(sensors,locations,activities,sensorDictList,locDictList):
     index = 0
     for activity in activities:
         print(sensors)
-        sensor = sensors[index]
+        sensorSet = sensors[index]
         location = locations[index]
         newSensorList = []
         newLocList = []
-        for sensorDict in sensorDictList:
-            if sensor == sensorDict['sensor']:
-                newSensorList.append(sensorDict)
+        for sensor in sensorSet:
+	        for sensorDict in sensorDictList:
+	            if sensor == sensorDict['sensor']:
+	                newSensorList.append(sensorDict)
         for locDict in locDictList:
             if location == locDict['location']:
                 newLocList.append(locDict)
@@ -155,6 +156,10 @@ def getActivityTimes(sensorDictList, locationDictList):
                     activityTimes.append([locDict['startTime'],locDict['endTime']])
                 elif sensorDict['endTime'] <= locDict['endTime'] and sensorDict['endTime'] >= locDict['startTime']:
                     activityTimes.append([locDict['startTime'],sensorDict['endTime']])
+
+    if len(sensorDictList) == 0:
+    	for locDict in locationDictList:
+    		activityTimes.append([locDict['startTime'], locDict['endTime']])
 
     return activityTimes
 
@@ -382,11 +387,19 @@ def getLocationsOfDevices():
 def getDevicesAtAllLocations():
 
 	return {
-		'The Kitchen': ['Stove', 'Refrigerator', 'Wink Power Strip'],
+		'The Kitchen': ['Stove', 'Refrigerator', 'Wink_Power_Strip'],
 		'The Livingroom': ['TV', 'X_Box_360'],
-		'Bathroom One': ['Float_Switch']
+		'Bathroom One': ['Float_Switch'],
+		'Bedroom Two': []
 	}
 
+def getAllActivityLocations():
+	return {
+		"Cooking": "The Kitchen",
+		"Entertainment": "The Livingroom",
+		"Sleeping": "Bedroom Two",
+		"Bathroom": "Bathroom One"
+	}
 #
 #
 #def getAllDevicesAtDate(date):

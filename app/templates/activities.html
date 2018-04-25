@@ -8,7 +8,8 @@
   
   
 <link rel="stylesheet" href="../static/css/style4.css">
-
+<!-- Script needed for jQuery script in bug form -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   
 </head>
 <body>
@@ -16,7 +17,7 @@
 <section class="content">
   <h1 class="content__heading">Assign Activities</h1>
   <p class="content__lede">Use the following input to assign sensors to activities</p>
-  <form class="content__form contact-form">
+  <form action='/createActivities' class="content__form contact-form">
     <div class="testing">
     </div>
 
@@ -24,69 +25,66 @@
       <label class="contact-form__label" for="activity1">Choose Activity</label>
       <select class="contact-form__input contact-form__input--select" id="activity1" name="activity1">
         <option></option>
-        <option>Cooking</option>
-        <option>Entertainment</option>
-        <option>Sleeping</option>
+        {% for activity in allActivities %}
+          <option {{ "selected" if activities[0]==activity}}>{{activity}}</option>
+        {% endfor %}
       </select>
     </div>
     <div class="contact-form__input-group">
       <p class="contact-form__label--checkbox-group">Choose Sensors:</p>
-      <input class="contact-form__input contact-form__input--checkbox" id="sensor-stove" name="sensor-activity1" type="checkbox" value="stove"/>
+      {% for sensor in allSensors %}
+        <input class="contact-form__input contact-form__input--checkbox" id="sensor-{{sensor}}" name="sensor-activity1" type="checkbox" value="{{sensor}}" {{ "checked" if sensor in sensors[0] }}/>
+        <label class="contact-form__label contact-form__label--checkbox" for="sensor-{{sensor}}">{{sensor}}</label>
+      {% endfor %}
+      <!-- <input class="contact-form__input contact-form__input--checkbox" id="sensor-stove" name="sensor-activity1" type="checkbox" value="stove"/>
       <label class="contact-form__label contact-form__label--checkbox" for="snacks-pizza">Stove</label>
       <input class="contact-form__input contact-form__input--checkbox" id="sensor-microwave" name="sensor-activity1" type="checkbox" value="microwave"/>
       <label class="contact-form__label contact-form__label--checkbox" for="snacks-cake">Microwave</label>
       <input class="contact-form__input contact-form__input--checkbox" id="sensor-TV" name="sensor-activity1" type="checkbox" value="TV"/>
       <label class="contact-form__label contact-form__label--checkbox" for="snacks-cake">TV</label>
       <input class="contact-form__input contact-form__input--checkbox" id="sensor-xbox" name="sensor-activity1" type="checkbox" value="xbox"/>
-      <label class="contact-form__label contact-form__label--checkbox" for="snacks-cake">XBox</label>
+      <label class="contact-form__label contact-form__label--checkbox" for="snacks-cake">XBox</label> -->
     </div>
-<br><br>
-        <div class="contact-form__input-group">
+    <br>
+    <div class="contact-form__input-group">
       <label class="contact-form__label" for="activity2">Choose Activity</label>
       <select class="contact-form__input contact-form__input--select" id="activity1" name="activity2">
         <option></option>
-        <option>Cooking</option>
-        <option>Entertainment</option>
-        <option>Sleeping</option>
+        {% for activity in allActivities %}
+          <option {{ "selected" if activities[1]==activity}}>{{activity}}</option>
+        {% endfor %}
 
       </select>
     </div>
     <div class="contact-form__input-group">
       <p class="contact-form__label--checkbox-group">Choose Sensors:</p>
-      <input class="contact-form__input contact-form__input--checkbox" id="sensor-stove" name="sensor-activity2" type="checkbox" value="stove"/>
-      <label class="contact-form__label contact-form__label--checkbox" for="snacks-pizza">Stove</label>
-      <input class="contact-form__input contact-form__input--checkbox" id="sensor-microwave" name="sensor-activity2" type="checkbox" value="microwave"/>
-      <label class="contact-form__label contact-form__label--checkbox" for="snacks-cake">Microwave</label>
-      <input class="contact-form__input contact-form__input--checkbox" id="sensor-TV" name="sensor-activity2" type="checkbox" value="TV"/>
-      <label class="contact-form__label contact-form__label--checkbox" for="snacks-cake">TV</label>
-      <input class="contact-form__input contact-form__input--checkbox" id="sensor-xbox" name="sensor-activity2" type="checkbox" value="xbox"/>
-      <label class="contact-form__label contact-form__label--checkbox" for="snacks-cake">XBox</label>
+      {% for sensor in allSensors %}
+        <input class="contact-form__input contact-form__input--checkbox" id="sensor-{{sensor}}" name="sensor-activity2" type="checkbox" value="{{sensor}}" {{ "checked" if sensor in sensors[1] }}/>
+        <label class="contact-form__label contact-form__label--checkbox" for="sensor-{{sensor}}">{{sensor}}</label>
+      {% endfor %}
     </div>
-    <br><br>
-        <div class="contact-form__input-group">
+    <br>
+    <div class="contact-form__input-group">
       <label class="contact-form__label" for="activity3">Choose Activity</label>
       <select class="contact-form__input contact-form__input--select" id="activity1" name="activity3">
         <option></option>
-        <option>Cooking</option>
-        <option>Entertainment</option>
-        <option>Sleeping</option>
+        {% for activity in allActivities %}
+          <option {{ "selected" if activities[2]==activity}}>{{activity}}</option>
+        {% endfor %}
       </select>
     </div>
     <div class="contact-form__input-group">
       <p class="contact-form__label--checkbox-group">Choose Sensors:</p>
-      <input class="contact-form__input contact-form__input--checkbox" id="sensor-stove" name="sensor-activity3" type="checkbox" value="stove"/>
-      <label class="contact-form__label contact-form__label--checkbox" for="snacks-pizza">Stove</label>
-      <input class="contact-form__input contact-form__input--checkbox" id="sensor-microwave" name="sensor-activity3" type="checkbox" value="microwave"/>
-      <label class="contact-form__label contact-form__label--checkbox" for="snacks-cake">Microwave</label>
-      <input class="contact-form__input contact-form__input--checkbox" id="sensor-TV" name="sensor-activity3" type="checkbox" value="TV"/>
-      <label class="contact-form__label contact-form__label--checkbox" for="snacks-cake">TV</label>
-      <input class="contact-form__input contact-form__input--checkbox" id="sensor-xbox" name="sensor-activity3" type="checkbox" value="xbox"/>
-      <label class="contact-form__label contact-form__label--checkbox" for="snacks-cake">XBox</label>
+      {% for sensor in allSensors %}
+        <input class="contact-form__input contact-form__input--checkbox" id="sensor-{{sensor}}" name="sensor-activity3" type="checkbox" value="{{sensor}}" {{ "checked" if sensor in sensors[2] }}/>
+        <label class="contact-form__label contact-form__label--checkbox" for="sensor-{{sensor}}">{{sensor}}</label>
+      {% endfor %}
     </div>
-<button class="contact-form__button" type="submit">Update</button>
+    <br>
+    <button class="contact-form__button" type="submit">Update</button>
 
 <br>
-<a href="viz.html">Go to Location View</a>
+<a href="/viz">Go to Location View</a>
 </form>
 </section>
 

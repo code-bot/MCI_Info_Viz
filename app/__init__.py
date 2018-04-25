@@ -7,11 +7,50 @@ import json
 app = Flask(__name__) # create the application instance
 app.config.from_object('config.Config') # load config
 
+
+activities = ["Sleeping", "Cooking", "Entertainment"]
+sensors = [[],["Stove","Refrigerator"],["TV","X Box 360"]]
+locations = ["Bedroom Two","The Kitchen","The Livingroom"]
+
+
 @app.route('/')
 def activity():
-
+	allActivities = list(database.getAllActivityLocations().keys())
+	allSensors = list(database.getLocationsOfDevices().keys())
+	allLocations = list(database.getDevicesAtAllLocations().keys())
+	print(allActivities)
+	print(allSensors)
+	print(allLocations)
+	print(activities)
+	print(sensors)
     
-    return render_template('home.html')
+	return render_template('activities.html', allActivities=allActivities, allSensors=allSensors, activities=activities, sensors=sensors)
+
+@app.route('/addActivities', methods=['POST'])
+def addActivities():
+	global activities
+	global sensors
+	global locations
+	activities = []
+	sensors = []
+	locations = []
+	activityLocations = database.getAllActivityLocations()
+
+	for i in range(3):
+		index = i+1
+		activity = request.form.get('activity'+str(index), None)
+		if activity:
+			activities.append(activity)
+			locations.append(activityLocations[activity])
+			sensorSet = request.form.getlist('sensor-activity'+str(index)+'[]')
+			sensors.append(sensorSet)
+
+	print(activities)
+	print(sensors)
+	print(locations)
+
+	return json.dumps({})
+
 
 @app.route('/viz', methods=['GET', 'POST'])
 def viz():
@@ -34,7 +73,14 @@ def viz():
 	elif viewType == 'activity':
 		title = "Patient's Activities"
 		vizFile = 'activityView.js'
-		vizData = database.getAllActivities()
+		vizData_sensors = database.getAllDevicesAtDate(date)
+		vizData_location = database.getAllLocationsAtDate(date)
+		sensorList = []
+		for sensorSet in sensors:
+			for sensor in sensorSet:
+				sensorList.append(sensor.replace(' ','_'))
+
+		vizData = database.getAllActivities(sensorList, locations, activities, vizData_sensors, vizData_location)
 	elif viewType == 'sensor':
 		title = "Active Sensors and Patient's Location"
 		vizFile = 'sensorView.js'

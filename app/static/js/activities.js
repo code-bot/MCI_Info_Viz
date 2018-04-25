@@ -122,6 +122,10 @@ var handleFormSubmit = function handleFormSubmit(event) {
   var data = formToJSON(form.elements);
   console.log(data);
 
+  $.post('/addActivities', data, function(response) {
+    window.location.href='/';
+  }, 'json');
+
 };
 
 /*
